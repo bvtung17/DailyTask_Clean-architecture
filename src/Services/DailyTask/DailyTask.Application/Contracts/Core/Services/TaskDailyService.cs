@@ -3,11 +3,7 @@ using DailyTask.Application.Contracts.Core.Interfaces;
 using DailyTask.Application.Contracts.Persistence;
 using DailyTask.Application.Dtos;
 using DailyTask.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailyTask.Application.Contracts.Core.Services
 {
@@ -36,7 +32,7 @@ namespace DailyTask.Application.Contracts.Core.Services
 
         public async Task<IReadOnlyList<TaskDaily>> GetAll()
         {
-            return await _unitOfWork.GetRepository<TaskDaily>().GetAllAsync();
+            return await _unitOfWork.GetRepository<TaskDaily>().AsQueryable().ToListAsync();
         }
 
         public async Task<TaskDaily> GetTaskById(int id)

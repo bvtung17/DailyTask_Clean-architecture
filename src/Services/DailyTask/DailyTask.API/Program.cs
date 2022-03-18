@@ -1,5 +1,7 @@
 using System.Reflection;
 using AutoMapper;
+using DailyTask.Application.Contracts.Core.Interfaces;
+using DailyTask.Application.Contracts.Core.Services;
 using DailyTask.Application.Contracts.Persistence;
 using DailyTask.Application.Mappings;
 using DailyTask.Infrastructure.Persistence;
@@ -33,6 +35,9 @@ builder.Services.AddSingleton(mapper);
 //DI
 builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
 builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+builder.Services.AddTransient<IAuthenticationService, AuthenticationService >();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<ITaskDailyService, TaskDailyService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

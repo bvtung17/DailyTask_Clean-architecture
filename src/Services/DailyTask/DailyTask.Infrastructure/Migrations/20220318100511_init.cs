@@ -19,7 +19,11 @@ namespace DailyTask.Infrastructure.Migrations
                     UserName = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
                     Password = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
                     FullName = table.Column<string>(type: "text", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {

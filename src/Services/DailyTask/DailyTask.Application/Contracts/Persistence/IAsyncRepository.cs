@@ -4,7 +4,7 @@ namespace DailyTask.Application.Contracts.Persistence
 {
     public interface IAsyncRepository<T> where T : EntityBase
     {
-        Task<IReadOnlyList<T>> GetAllAsync();
+        IQueryable<T> AsQueryable();
         Task<T> GetByIdAsync(int id);
         Task<T> AddAsync(T entity);
         void Update(T entity);

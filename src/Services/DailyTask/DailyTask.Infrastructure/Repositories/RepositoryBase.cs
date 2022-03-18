@@ -23,9 +23,9 @@ namespace DailyTask.Infrastructure.Repositories
             _db.Set<T>().Remove(entity);         
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync()
+        public IQueryable<T> AsQueryable()
         {
-            return await _db.Set<T>().ToListAsync();
+             return _db.Set<T>().AsQueryable();
         }
 
         public async Task<T> GetByIdAsync(int id)
