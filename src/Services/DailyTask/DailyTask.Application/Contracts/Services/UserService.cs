@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using DailyTask.Application.Contracts.Core.Interfaces;
-using DailyTask.Application.Contracts.Persistence;
+using DailyTask.Application.Contracts.Interfaces.IServices;
+using DailyTask.Application.Contracts.Interfaces.Persistence;
 using DailyTask.Application.Dtos;
 using DailyTask.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DailyTask.Application.Contracts.Core.Services
+namespace DailyTask.Application.Contracts.Services
 {
     public class UserService : IUserService
     {

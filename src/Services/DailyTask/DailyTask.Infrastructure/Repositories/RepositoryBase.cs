@@ -1,4 +1,4 @@
-using DailyTask.Application.Contracts.Persistence;
+using DailyTask.Application.Contracts.Interfaces.Persistence;
 using DailyTask.Domain.Common;
 using DailyTask.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

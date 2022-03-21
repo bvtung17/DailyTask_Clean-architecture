@@ -1,4 +1,4 @@
-﻿using DailyTask.Application.Contracts.Core.Interfaces;
+﻿using DailyTask.Application.Contracts.Interfaces.IServices;
 using DailyTask.Application.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

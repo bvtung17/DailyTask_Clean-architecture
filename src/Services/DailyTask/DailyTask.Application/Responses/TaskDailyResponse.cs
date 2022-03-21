@@ -1,8 +1,8 @@
 ﻿using DailyTask.Domain.Common;
 
-namespace DailyTask.Application.Dtos
+namespace DailyTask.Application.Responses
 {
-    public class TaskDailyDto : EntityBaseDto
+    public class TaskDailyResponse : EntityBaseModel
     {
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
@@ -10,6 +10,5 @@ namespace DailyTask.Application.Dtos
         public string Note { get; set; }
         public Status Status { get; set; }
         public int UserId { get; set; }
-        public UserDto User { get; set; }
     }
 }

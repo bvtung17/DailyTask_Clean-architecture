@@ -1,8 +1,9 @@
 using System.Reflection;
 using AutoMapper;
-using DailyTask.Application.Contracts.Core.Interfaces;
-using DailyTask.Application.Contracts.Core.Services;
-using DailyTask.Application.Contracts.Persistence;
+using DailyTask.Application.Contracts.Interfaces.IServices;
+using DailyTask.Application.Contracts.Interfaces.Persistence;
+using DailyTask.Application.Contracts.Services;
+using DailyTask.Application.Handlers;
 using DailyTask.Application.Mappings;
 using DailyTask.Infrastructure.Persistence;
 using DailyTask.Infrastructure.Repositories;
@@ -38,6 +39,16 @@ builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService >();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ITaskDailyService, TaskDailyService>();
+
+//MediatR
+//builder.Services.AddScoped<IGetTaskDailyByIdQueryHandler, GetTaskDailyByIdQueryHandler>();
+
+builder.Services.AddMediatR(typeof(GetTaskDailyByIdQueryHandler).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(GetAllTaskDailyQueryHandler).GetTypeInfo().Assembly);
+
+builder.Services.AddMediatR(typeof(CreateTaskDailyCommandHandler).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(DeleteTaskDailyCommandHandler).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(UpdateTaskDailyCommandHandler).GetTypeInfo().Assembly);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

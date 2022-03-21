@@ -1,6 +1,6 @@
 ﻿using DailyTask.Application.Dtos;
 
-namespace DailyTask.Application.Contracts.Core.Interfaces
+namespace DailyTask.Application.Contracts.Interfaces.IServices
 {
     public interface IAuthenticationService
     {

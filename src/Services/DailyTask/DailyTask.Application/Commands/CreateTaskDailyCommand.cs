@@ -1,8 +1,10 @@
-﻿using DailyTask.Domain.Common;
+﻿using DailyTask.Application.Responses;
+using DailyTask.Domain.Common;
+using MediatR;
 
-namespace DailyTask.Application.Dtos
+namespace DailyTask.Application.Commands
 {
-    public class TaskDailyDto : EntityBaseDto
+    public class CreateTaskDailyCommand : EntityBaseModel, IRequest<TaskDailyResponse>
     {
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
@@ -10,6 +12,5 @@ namespace DailyTask.Application.Dtos
         public string Note { get; set; }
         public Status Status { get; set; }
         public int UserId { get; set; }
-        public UserDto User { get; set; }
     }
 }

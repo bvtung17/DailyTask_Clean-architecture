@@ -1,6 +1,6 @@
 using DailyTask.Domain.Common;
 
-namespace DailyTask.Application.Contracts.Persistence
+namespace DailyTask.Application.Contracts.Interfaces.Persistence
 {
     public interface IAsyncRepository<T> where T : EntityBase
     {

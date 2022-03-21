@@ -1,7 +1,7 @@
 ﻿using DailyTask.Application.Dtos;
 using DailyTask.Domain.Entities;
 
-namespace DailyTask.Application.Contracts.Core.Interfaces
+namespace DailyTask.Application.Contracts.Interfaces.IServices
 {
     public interface IUserService
     {
