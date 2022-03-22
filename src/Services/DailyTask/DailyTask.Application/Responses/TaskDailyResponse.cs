@@ -2,7 +2,7 @@
 
 namespace DailyTask.Application.Responses
 {
-    public class TaskDailyResponse : EntityBaseModel
+    public class TaskDailyResponse : EntityResponeBase
     {
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
@@ -10,5 +10,6 @@ namespace DailyTask.Application.Responses
         public string Note { get; set; }
         public Status Status { get; set; }
         public int UserId { get; set; }
+        public UserResponse UserResponse { get; set; }
     }
 }

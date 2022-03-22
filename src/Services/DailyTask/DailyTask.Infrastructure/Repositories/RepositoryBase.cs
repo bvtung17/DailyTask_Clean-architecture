@@ -18,9 +18,10 @@ namespace DailyTask.Infrastructure.Repositories
             return entity;
         }
 
-        public void Delete(T entity)
+        public T Delete(T entity)
         {
-            _db.Set<T>().Remove(entity);         
+            _db.Set<T>().Remove(entity);
+            return entity;
         }
 
         public IQueryable<T> AsQueryable()
@@ -33,9 +34,10 @@ namespace DailyTask.Infrastructure.Repositories
             return await _db.Set<T>().Where(_=>_.Id == id).FirstOrDefaultAsync();
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
             _db.Set<T>().Update(entity);
+            return entity;
         }
     }
 }

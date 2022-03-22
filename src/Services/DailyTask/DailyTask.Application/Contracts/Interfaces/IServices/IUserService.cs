@@ -1,15 +1,17 @@
 ﻿using DailyTask.Application.Dtos;
+using DailyTask.Application.Features.DailyTasks.Commands;
+using DailyTask.Application.Responses;
 using DailyTask.Domain.Entities;
 
 namespace DailyTask.Application.Contracts.Interfaces.IServices
 {
     public interface IUserService
     {
-        Task<IReadOnlyList<User>> GetAll();
-        Task<User> GetUserById(int id);
-        Task<int> DeleteUser(int id);
-        Task<int> AddUser(UserDto userDto);
-        Task<int> UpdateUser(UserDto userDto);
+        Task<IReadOnlyList<UserResponse>> GetAll(int take);
+        Task<UserResponse> GetUserById(int id);
+        Task<UserResponse> DeleteUser(int id);
+        Task<int> AddUser(CreateUserCommand createUserCommand);
+        Task<int> UpdateUser(UpdateUserCommand updateUserCommand);
 
     }
 }

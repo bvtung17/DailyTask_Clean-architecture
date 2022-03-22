@@ -1,10 +1,10 @@
-﻿using DailyTask.Application.Commands;
+﻿using DailyTask.Application.Features.DailyTasks.Commands;
 using DailyTask.Application.Responses;
 
 namespace DailyTask.Application.Contracts.Interfaces.IHandlers.ICommandHandlers
 {
     public interface IUpdateTaskDailyCommandHandler
     {
-        TaskDailyResponse GetTaskDailyById(UpdateTaskDailyCommand request);
+        TaskDailyResponse UpdateTaskDaily(UpdateTaskDailyCommand request);
     }
 }

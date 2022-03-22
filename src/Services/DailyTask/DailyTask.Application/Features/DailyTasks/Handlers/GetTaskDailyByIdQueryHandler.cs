@@ -1,9 +1,9 @@
 ﻿using DailyTask.Application.Contracts.Interfaces.IServices;
-using DailyTask.Application.Queries;
+using DailyTask.Application.Features.DailyTasks.Queries;
 using DailyTask.Application.Responses;
 using MediatR;
 
-namespace DailyTask.Application.Handlers
+namespace DailyTask.Application.Features.DailyTasks.Handlers
 {
     public class GetTaskDailyByIdQueryHandler : IRequestHandler<GetTaskDailyByIdQuery, TaskDailyResponse>
     {

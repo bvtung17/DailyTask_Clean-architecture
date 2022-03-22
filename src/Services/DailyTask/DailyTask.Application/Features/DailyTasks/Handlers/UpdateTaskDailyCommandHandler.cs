@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using DailyTask.Application.Commands;
 using DailyTask.Application.Contracts.Interfaces.IServices;
-using DailyTask.Application.Dtos;
+using DailyTask.Application.Features.DailyTasks.Commands;
 using DailyTask.Application.Responses;
 using MediatR;
 
-namespace DailyTask.Application.Handlers
+namespace DailyTask.Application.Features.DailyTasks.Handlers
 {
     public class UpdateTaskDailyCommandHandler : IRequestHandler<UpdateTaskDailyCommand, TaskDailyResponse>
     {
@@ -18,8 +17,7 @@ namespace DailyTask.Application.Handlers
         }
         public async Task<TaskDailyResponse> Handle(UpdateTaskDailyCommand request, CancellationToken cancellationToken)
         {
-            var taskDto = _mapper.Map<TaskDailyDto>(request);
-            var result = await _taskDailyService.UpdateTask(taskDto);
+            int result = await _taskDailyService.UpdateTask(request);
             if (result <= 0)
             {
                 return null;

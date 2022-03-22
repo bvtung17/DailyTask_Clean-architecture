@@ -10,6 +10,5 @@ namespace DailyTask.Application.Dtos
         public string Note { get; set; }
         public Status Status { get; set; }
         public int UserId { get; set; }
-        public UserDto User { get; set; }
     }
 }

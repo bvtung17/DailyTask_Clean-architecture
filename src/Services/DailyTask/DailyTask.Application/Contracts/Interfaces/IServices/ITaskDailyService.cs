@@ -1,16 +1,14 @@
-﻿using DailyTask.Application.Commands;
-using DailyTask.Application.Dtos;
+﻿using DailyTask.Application.Features.DailyTasks.Commands;
 using DailyTask.Application.Responses;
-using DailyTask.Domain.Entities;
 
 namespace DailyTask.Application.Contracts.Interfaces.IServices
 {
     public interface ITaskDailyService
     {
-        Task<IReadOnlyList<TaskDaily>> GetAll();
+        Task<IReadOnlyList<TaskDailyResponse>> GetAll(int take);
         Task<TaskDailyResponse> GetTaskById(int id);
-        Task<int> DeleteTask(int id);
+        Task<TaskDailyResponse> DeleteTask(int id);
         Task<int> AddTask(CreateTaskDailyCommand request);
-        Task<int> UpdateTask(TaskDailyDto taskDailyDto);
+        Task<int> UpdateTask(UpdateTaskDailyCommand updateTaskDailyCommand);
     }
 }

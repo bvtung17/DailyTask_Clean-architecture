@@ -3,10 +3,11 @@ using AutoMapper;
 using DailyTask.Application.Contracts.Interfaces.IServices;
 using DailyTask.Application.Contracts.Interfaces.Persistence;
 using DailyTask.Application.Contracts.Services;
-using DailyTask.Application.Handlers;
+using DailyTask.Application.Features.DailyTasks.Handlers;
 using DailyTask.Application.Mappings;
 using DailyTask.Infrastructure.Persistence;
 using DailyTask.Infrastructure.Repositories;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -45,10 +47,25 @@ builder.Services.AddTransient<ITaskDailyService, TaskDailyService>();
 
 builder.Services.AddMediatR(typeof(GetTaskDailyByIdQueryHandler).GetTypeInfo().Assembly);
 builder.Services.AddMediatR(typeof(GetAllTaskDailyQueryHandler).GetTypeInfo().Assembly);
-
 builder.Services.AddMediatR(typeof(CreateTaskDailyCommandHandler).GetTypeInfo().Assembly);
 builder.Services.AddMediatR(typeof(DeleteTaskDailyCommandHandler).GetTypeInfo().Assembly);
 builder.Services.AddMediatR(typeof(UpdateTaskDailyCommandHandler).GetTypeInfo().Assembly);
+
+builder.Services.AddMediatR(typeof(GetUserByIdQueryHandler).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(GetAllUserQueryHandler).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(CreateUserCommandHandler).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(DeleteUserCommandHandler).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(UpdateUserCommandHandler).GetTypeInfo().Assembly);
+//Validator
+builder.Services.AddControllers()
+                .AddFluentValidation(options =>
+                {
+                    // Validate child properties and root collection elements
+                    options.ImplicitlyValidateChildProperties = true;
+                    options.ImplicitlyValidateRootCollectionElements = true;
+                    // Automatic registration of validators in assembly
+                    options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+                });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

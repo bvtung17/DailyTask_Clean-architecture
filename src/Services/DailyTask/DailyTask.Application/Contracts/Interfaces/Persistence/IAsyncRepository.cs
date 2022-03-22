@@ -7,7 +7,7 @@ namespace DailyTask.Application.Contracts.Interfaces.Persistence
         IQueryable<T> AsQueryable();
         Task<T> GetByIdAsync(int id);
         Task<T> AddAsync(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        T Update(T entity);
+        T Delete(T entity);
     }
 }

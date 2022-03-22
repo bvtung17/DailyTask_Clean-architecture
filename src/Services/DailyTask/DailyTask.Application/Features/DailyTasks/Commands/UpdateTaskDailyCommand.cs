@@ -1,11 +1,13 @@
-﻿using DailyTask.Application.Responses;
+﻿using DailyTask.Application.Requests;
+using DailyTask.Application.Responses;
 using DailyTask.Domain.Common;
 using MediatR;
 
-namespace DailyTask.Application.Commands
+namespace DailyTask.Application.Features.DailyTasks.Commands
 {
-    public class UpdateTaskDailyCommand : EntityBaseModel, IRequest<TaskDailyResponse>
+    public class UpdateTaskDailyCommand : IRequest<TaskDailyResponse>
     {
+        public int Id { get; set; }
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
         public string Title { get; set; }

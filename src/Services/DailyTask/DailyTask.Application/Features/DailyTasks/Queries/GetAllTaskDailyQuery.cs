@@ -1,7 +1,7 @@
 ﻿using DailyTask.Application.Responses;
 using MediatR;
 
-namespace DailyTask.Application.Queries
+namespace DailyTask.Application.Features.DailyTasks.Queries
 {
     public class GetAllTaskDailyQuery : IRequest<List<TaskDailyResponse>>
     {

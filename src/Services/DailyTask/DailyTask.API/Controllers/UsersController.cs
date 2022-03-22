@@ -1,30 +1,32 @@
-using AutoMapper;
+﻿using AutoMapper;
 using DailyTask.Application.Dtos;
 using DailyTask.Application.Features.DailyTasks.Commands;
 using DailyTask.Application.Features.DailyTasks.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DailyTask.API.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("api/v1/[controller]")]
-    public class DailyTasksController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         protected ResponseDto _response;
-        public DailyTasksController(IMediator mediator, IMapper mapper)
+        public UsersController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
             this._response = new ResponseDto();
         }
-        [HttpGet("getAllTask")]
+        [HttpGet("getAllUser")]
         public async Task<IActionResult> GetAllTaskDaily([FromQuery] int take = 0)
         {
             try
             {
-                GetAllTaskDailyQuery requestModel = new GetAllTaskDailyQuery(take);
+                GetAllUserQuery requestModel = new GetAllUserQuery(take);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -44,12 +46,12 @@ namespace DailyTask.API.Controllers
                 return BadRequest(_response);
             }
         }
-        [HttpGet("getTaskById")]
-        public async Task<IActionResult> GetTaskDailyById([FromQuery] int id)
+        [HttpGet("getUserById")]
+        public async Task<IActionResult> GetUserById([FromQuery] int id)
         {
             try
             {
-                GetTaskDailyByIdQuery requestModel = new GetTaskDailyByIdQuery(id);
+                GetUserByIdQuery requestModel = new GetUserByIdQuery(id);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -69,8 +71,8 @@ namespace DailyTask.API.Controllers
                 return BadRequest(_response);
             }
         }
-        [HttpPost("createTask")]
-        public async Task<IActionResult> AddTaskDaily([FromBody] TaskDailyDto taskDailyDto)
+        [HttpPost("createUser")]
+        public async Task<IActionResult> AddUser([FromBody] UserDto userDto)
         {
             try
             {
@@ -78,7 +80,7 @@ namespace DailyTask.API.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                CreateTaskDailyCommand requestModel = _mapper.Map<CreateTaskDailyCommand>(taskDailyDto);
+                CreateUserCommand requestModel = _mapper.Map<CreateUserCommand>(userDto);
                 var result = await _mediator.Send(requestModel);
                 _response.DisplayMessage = "Sucessfully!";
                 _response.Result = result;
@@ -93,8 +95,8 @@ namespace DailyTask.API.Controllers
                 return BadRequest(_response);
             }
         }
-        [HttpPut("updateTask")]
-        public async Task<IActionResult> UpdateTaskDaily(int id, [FromBody] TaskDailyDto taskDailyDto)
+        [HttpPut("updateUser")]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserDto userDto)
         {
             try
             {
@@ -102,7 +104,7 @@ namespace DailyTask.API.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                UpdateTaskDailyCommand requestModel = _mapper.Map<UpdateTaskDailyCommand>(taskDailyDto);
+                UpdateUserCommand requestModel = _mapper.Map<UpdateUserCommand>(userDto);
                 requestModel.Id = id;
                 var result = await _mediator.Send(requestModel);
                 _response.DisplayMessage = "Sucessfully!";
@@ -118,12 +120,12 @@ namespace DailyTask.API.Controllers
                 return BadRequest(_response);
             }
         }
-        [HttpDelete("DeleteTask")]
-        public async Task<IActionResult> DeleteTaskDaily([FromQuery] int id)
+        [HttpDelete("deleteUser")]
+        public async Task<IActionResult> DeleteUser([FromQuery] int id)
         {
             try
             {
-                DeleteTaskDailyCommand requestModel = new DeleteTaskDailyCommand(id);
+                DeleteUserCommand requestModel = new DeleteUserCommand(id);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -145,3 +147,4 @@ namespace DailyTask.API.Controllers
         }
     }
 }
+   

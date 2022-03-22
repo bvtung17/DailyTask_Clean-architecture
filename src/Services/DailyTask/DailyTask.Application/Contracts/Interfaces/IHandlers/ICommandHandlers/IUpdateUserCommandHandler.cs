@@ -3,8 +3,8 @@ using DailyTask.Application.Responses;
 
 namespace DailyTask.Application.Contracts.Interfaces.IHandlers.ICommandHandlers
 {
-    public interface IDeleteTaskDailyCommandHandler
+    public interface IUpdateUserCommandHandler
     {
-        TaskDailyResponse DeleteTaskDaily(DeleteTaskDailyCommand request);
+        UserResponse UpdateUser(UpdateUserCommand request);
     }
 }
