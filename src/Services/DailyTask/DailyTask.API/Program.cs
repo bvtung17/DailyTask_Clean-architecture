@@ -5,11 +5,10 @@ using DailyTask.Application.Contracts.Interfaces.Persistence;
 using DailyTask.Application.Contracts.Services;
 using DailyTask.Application.Features.DailyTasks.Handlers;
 using DailyTask.Application.Mappings;
-using DailyTask.Infrastructure.Persistence;
+using DailyTask.Infrastructure;
 using DailyTask.Infrastructure.Repositories;
 using FluentValidation.AspNetCore;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddDbContext<DailyDbContext>(option =>
 {
     option.UseNpgsql(builder.Configuration.GetConnectionString("DailyTaskContext"));

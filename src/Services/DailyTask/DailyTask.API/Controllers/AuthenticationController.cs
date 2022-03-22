@@ -1,5 +1,6 @@
 ﻿using DailyTask.Application.Dtos;
 using DailyTask.Application.Contracts.Interfaces.IServices;
+using DailyTask.Application.Requests;
 
 namespace DailyTask.API.Controllers
 {
@@ -13,9 +14,9 @@ namespace DailyTask.API.Controllers
             _authenticationService = authenticationService;
         }
         [HttpGet]
-        public async Task<IActionResult> Login(string userName, string password)
+        public async Task<IActionResult> Login(LoginUserRequest request)
         {
-            var result = await _authenticationService.AuthenticateAsync(userName, password);
+            var result = await _authenticationService.AuthenticateAsync(request);
             return Ok(result);
         }
         [HttpPost]

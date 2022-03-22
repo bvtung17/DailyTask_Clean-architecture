@@ -2,6 +2,7 @@
 using DailyTask.Application.Contracts.Interfaces.IServices;
 using DailyTask.Application.Contracts.Interfaces.Persistence;
 using DailyTask.Application.Dtos;
+using DailyTask.Application.Requests;
 using DailyTask.Domain.Common;
 using DailyTask.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +18,10 @@ namespace DailyTask.Application.Contracts.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<bool> AuthenticateAsync(string username, string password)
+        public async Task<bool> AuthenticateAsync(LoginUserRequest request)
         {
-            string passwordHash = CreatePasswordMD5.GenerateHash(password);
-            User user = await _unitOfWork.GetRepository<User>().AsQueryable().Where(_ => _.UserName == username).SingleOrDefaultAsync();
+            string passwordHash = CreatePasswordMD5.GenerateHash(request.Password);
+            User user = await _unitOfWork.GetRepository<User>().AsQueryable().Where(_ => _.UserName == request.UserName).SingleOrDefaultAsync();
             if (user is null)
             {
                 return false;
