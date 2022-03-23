@@ -20,7 +20,8 @@ namespace DailyTask.Application.Contracts.Services
         public async Task<int> AddUser(CreateUserCommand createUserCommand)
         {
             var user = _mapper.Map<User>(createUserCommand);
-            var result = await _unitOfWork.GetRepository<User>().AddAsync(user);
+            var result = await _unitOfWork.GetRepository<User>()
+                .AddAsync(user);
             if (result == null)
             {
                 return 0;
@@ -30,8 +31,10 @@ namespace DailyTask.Application.Contracts.Services
 
         public async Task<UserResponse> DeleteUser(int id)
         {
-            var user = await _unitOfWork.GetRepository<User>().GetByIdAsync(id);
-            var result = _unitOfWork.GetRepository<User>().Delete(user);
+            var user = await _unitOfWork.GetRepository<User>()
+                .GetByIdAsync(id);
+            var result = _unitOfWork.GetRepository<User>()
+                .Delete(user);
             if (result == null)
             {
                 return null;
@@ -45,10 +48,15 @@ namespace DailyTask.Application.Contracts.Services
             List<User> users = new List<User>();
             if (take <= 0)
             {
-                users = await _unitOfWork.GetRepository<User>().AsQueryable().ToListAsync();
+                users = await _unitOfWork.GetRepository<User>()
+                    .AsQueryable()
+                    .ToListAsync();
                 return _mapper.Map<List<UserResponse>>(users);
             }
-            users = await _unitOfWork.GetRepository<User>().AsQueryable().Take(take).ToListAsync();
+            users = await _unitOfWork.GetRepository<User>()
+                .AsQueryable()
+                .Take(take)
+                .ToListAsync();
             return _mapper.Map<List<UserResponse>>(users);
         }
 
@@ -60,13 +68,15 @@ namespace DailyTask.Application.Contracts.Services
 
         public async Task<int> UpdateUser(UpdateUserCommand updateUserCommand)
         {
-            var user = await _unitOfWork.GetRepository<User>().GetByIdAsync(updateUserCommand.Id);
+            var user = await _unitOfWork.GetRepository<User>()
+                .GetByIdAsync(updateUserCommand.Id);
             if (user == null)
             {
                 return 0;
             }
             user = _mapper.Map(updateUserCommand, user);
-            var result = _unitOfWork.GetRepository<User>().Update(user);
+            var result = _unitOfWork.GetRepository<User>()
+                .Update(user);
             if (result == null)
             {
                 return 0;

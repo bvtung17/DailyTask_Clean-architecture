@@ -7,7 +7,6 @@ namespace DailyTask.Application.Validations.Commands
     {
         public CreateTaskDailyValidator()
         {
-            RuleFor(_ => _.Id).NotEmpty().WithMessage("This field cannot be left blank!");
             RuleFor(_ => _.TimeEnd).NotEmpty().WithMessage("This field cannot be left blank!");
             RuleFor(_ => _.TimeStart).NotEmpty().WithMessage("This field cannot be left blank!");
             RuleFor(_ => _.Title).NotEmpty().WithMessage("This field cannot be left blank!");

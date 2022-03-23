@@ -9,6 +9,7 @@ namespace DailyTask.Application.Validations.Commands
         {
             RuleFor(_ => _.UserName).NotEmpty().WithMessage("This field cannot be left blank!").MaximumLength(250);
             RuleFor(_ => _.Password).NotEmpty().WithMessage("This field cannot be left blank!").MaximumLength(250);
+            RuleFor(_ => _.FullName).NotEmpty().WithMessage("This field cannot be left blank!").MaximumLength(250);
         }
     }
 }

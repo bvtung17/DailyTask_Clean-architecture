@@ -21,7 +21,10 @@ namespace DailyTask.Application.Contracts.Services
         public async Task<bool> AuthenticateAsync(LoginUserRequest request)
         {
             string passwordHash = CreatePasswordMD5.GenerateHash(request.Password);
-            User user = await _unitOfWork.GetRepository<User>().AsQueryable().Where(_ => _.UserName == request.UserName).SingleOrDefaultAsync();
+            User user = await _unitOfWork.GetRepository<User>()
+                .AsQueryable()
+                .Where(_ => _.UserName == request.UserName)
+                .SingleOrDefaultAsync();
             if (user is null)
             {
                 return false;

@@ -6,19 +6,16 @@ using MediatR;
 
 namespace DailyTask.Application.Features.DailyTasks.Handlers
 {
-    public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQuery, List<UserResponse>>
+    public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQuery, IReadOnlyList<UserResponse>>
     {
         private readonly IUserService _userServices;
-        private readonly IMapper _mapper;
-        public GetAllUserQueryHandler(IUserService userServices, IMapper mapper)
+        public GetAllUserQueryHandler(IUserService userServices)
         {
             _userServices = userServices;
-            _mapper = mapper;
         }
-        public async Task<List<UserResponse>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
+        public async Task<IReadOnlyList<UserResponse>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
         {
-            var users = await _userServices.GetAll(request.Take);
-            return _mapper.Map<List<UserResponse>>(users);
+            return await _userServices.GetAll(request.Take);
         }
     }
 }

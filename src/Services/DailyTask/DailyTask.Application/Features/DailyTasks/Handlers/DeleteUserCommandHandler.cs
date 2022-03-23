@@ -9,11 +9,9 @@ namespace DailyTask.Application.Features.DailyTasks.Handlers
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, UserResponse>
     {
         private readonly IUserService _userServices;
-        private readonly IMapper _mapper;
-        public DeleteUserCommandHandler(IUserService userServices, IMapper mapper)
+        public DeleteUserCommandHandler(IUserService userServices)
         {
             _userServices = userServices;
-            _mapper = mapper;
         }
         public async Task<UserResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
@@ -22,7 +20,7 @@ namespace DailyTask.Application.Features.DailyTasks.Handlers
             {
                 return null;
             }
-            return _mapper.Map<UserResponse>(user);
+            return user;
         }
     }
 }

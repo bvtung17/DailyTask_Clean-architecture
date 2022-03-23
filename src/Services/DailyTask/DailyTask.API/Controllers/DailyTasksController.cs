@@ -69,6 +69,31 @@ namespace DailyTask.API.Controllers
                 return BadRequest(_response);
             }
         }
+        [HttpGet("getTaskByUserId")]
+        public async Task<IActionResult> GetTaskDailyByUserId([FromQuery] int userId)
+        {
+            try
+            {
+                GetTaskDailyByUserIdQuery requestModel = new GetTaskDailyByUserIdQuery(userId);
+                var result = await _mediator.Send(requestModel);
+                if (result == null)
+                {
+                    _response.IsSuccess = false;
+                    return BadRequest(_response);
+                }
+                _response.Result = result;
+                _response.DisplayMessage = "Sucessfully!";
+                return Ok(_response);
+            }
+            catch (Exception e)
+            {
+                _response.Result = null;
+                _response.DisplayMessage = "Error!";
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { e.Message };
+                return BadRequest(_response);
+            }
+        }
         [HttpPost("createTask")]
         public async Task<IActionResult> AddTaskDaily([FromBody] TaskDailyDto taskDailyDto)
         {

@@ -9,11 +9,9 @@ namespace DailyTask.Application.Features.DailyTasks.Handlers
     public class DeleteTaskDailyCommandHandler : IRequestHandler<DeleteTaskDailyCommand, TaskDailyResponse>
     {
         private readonly ITaskDailyService _taskDailyService;
-        private readonly IMapper _mapper;
-        public DeleteTaskDailyCommandHandler(ITaskDailyService taskDailyService, IMapper mapper)
+        public DeleteTaskDailyCommandHandler(ITaskDailyService taskDailyService)
         {
             _taskDailyService = taskDailyService;
-            _mapper = mapper;
         }
         public async Task<TaskDailyResponse> Handle(DeleteTaskDailyCommand request, CancellationToken cancellationToken)
         {
@@ -22,7 +20,7 @@ namespace DailyTask.Application.Features.DailyTasks.Handlers
             {
                 return null;
             }
-            return _mapper.Map<TaskDailyResponse>(taskDaily);
+            return taskDaily;
         }
     }
 }
