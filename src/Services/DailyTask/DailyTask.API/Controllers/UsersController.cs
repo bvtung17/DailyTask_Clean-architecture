@@ -21,7 +21,7 @@ namespace DailyTask.API.Controllers
             _mapper = mapper;
             this._response = new ResponseDto();
         }
-        [HttpGet("getAllUser")]
+        [HttpGet("get-all-user")]
         public async Task<IActionResult> GetAllTaskDaily([FromQuery] int take = 0)
         {
             try
@@ -46,7 +46,7 @@ namespace DailyTask.API.Controllers
                 return BadRequest(_response);
             }
         }
-        [HttpGet("getUserById")]
+        [HttpGet("get-user-by-id")]
         public async Task<IActionResult> GetUserById([FromQuery] int id)
         {
             try
@@ -71,7 +71,7 @@ namespace DailyTask.API.Controllers
                 return BadRequest(_response);
             }
         }
-        [HttpPost("createUser")]
+        [HttpPost("create-user")]
         public async Task<IActionResult> AddUser([FromBody] UserDto userDto)
         {
             try
@@ -95,7 +95,7 @@ namespace DailyTask.API.Controllers
                 return BadRequest(_response);
             }
         }
-        [HttpPut("updateUser")]
+        [HttpPut("update-ưser")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserDto userDto)
         {
             try
@@ -120,7 +120,7 @@ namespace DailyTask.API.Controllers
                 return BadRequest(_response);
             }
         }
-        [HttpDelete("deleteUser")]
+        [HttpDelete("delete-user")]
         public async Task<IActionResult> DeleteUser([FromQuery] int id)
         {
             try
