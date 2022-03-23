@@ -5,10 +5,15 @@ using DailyTask.Application.Contracts.Interfaces.Persistence;
 using DailyTask.Application.Contracts.Services;
 using DailyTask.Application.Features.DailyTasks.Handlers;
 using DailyTask.Application.Mappings;
+using DailyTask.Application.PipelineBehaviours;
+using DailyTask.Application.Validations.Commands;
 using DailyTask.Infrastructure;
+using DailyTask.Infrastructure.Persistence;
 using DailyTask.Infrastructure.Repositories;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +46,6 @@ builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService >();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ITaskDailyService, TaskDailyService>();
-
 //MediatR
 //builder.Services.AddScoped<IGetTaskDailyByIdQueryHandler, GetTaskDailyByIdQueryHandler>();
 
@@ -57,15 +61,9 @@ builder.Services.AddMediatR(typeof(CreateUserCommandHandler).GetTypeInfo().Assem
 builder.Services.AddMediatR(typeof(DeleteUserCommandHandler).GetTypeInfo().Assembly);
 builder.Services.AddMediatR(typeof(UpdateUserCommandHandler).GetTypeInfo().Assembly);
 //Validator
-builder.Services.AddControllers()
-                .AddFluentValidation(options =>
-                {
-                    // Validate child properties and root collection elements
-                    options.ImplicitlyValidateChildProperties = true;
-                    options.ImplicitlyValidateRootCollectionElements = true;
-                    // Automatic registration of validators in assembly
-                    options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-                });
+
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+builder.Services.AddValidatorsFromAssembly(typeof(CreateTaskDailyValidator).Assembly);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

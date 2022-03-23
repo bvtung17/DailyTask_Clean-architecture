@@ -1,7 +1,7 @@
 ﻿using DailyTask.Application.Features.DailyTasks.Commands;
 using FluentValidation;
 
-namespace DailyTask.Application.Behaviours.Commands
+namespace DailyTask.Application.Validations.Commands
 {
     public class CreateTaskDailyValidator : AbstractValidator<CreateTaskDailyCommand>
     {
