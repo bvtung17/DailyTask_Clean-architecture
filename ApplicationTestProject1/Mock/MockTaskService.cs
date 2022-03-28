@@ -10,6 +10,7 @@ using System.Linq;
 using DailyTask.Application.Responses;
 using System.Collections.Generic;
 using Xunit;
+using DailyTask.Application.Contracts.Services;
 
 namespace ApplicationTestProject1.Mock
 {
@@ -17,21 +18,25 @@ namespace ApplicationTestProject1.Mock
     {
         private readonly IMapper _mapper;
         private readonly Mock<IAsyncRepository<TaskDaily>> _mockRepo;
-        public MockTaskService(Mock<IAsyncRepository<TaskDaily>> mockRepo)
+        private readonly Mock<IUnitOfWork> _mockUow;
+        private readonly Mock<IUserService> _mockUserService;
+        public MockTaskService()
         {
             var mappingConfig = new MapperConfiguration(_ => { _.AddProfile<MappingProfile>(); });
             _mapper = mappingConfig.CreateMapper();
             _mockRepo = MockTaskReponsitory.GetTaskDailyRepository();
+            _mockUow = MockUnitofwork.GetUnitOfWork();
         }
+        [Fact]
         public async Task<Mock<ITaskDailyService>> GetTaskDailyServicesAsync()
         {
-            var mockService = new Mock<ITaskDailyService>();
-            var test = await _mockRepo.Object.AsQueryable().ToListAsync();
-            mockService.Setup(x => x.GetAll(1)).ReturnsAsync((List<TaskDailyResponse> taskDailyResponse) =>
-            {               
-                return _mapper.Map<List<TaskDailyResponse>>(test);
-            });
-            return mockService;
+            var mockService1 = new Mock<ITaskDailyService>();
+            var mockRepo = MockTaskReponsitory.GetTaskDailyRepository();
+            var mockUow = MockUnitofwork.GetUnitOfWork();
+            mockUow.Setup(_ => _.GetRepository<TaskDaily>().AsQueryable()).Returns(mockRepo.Object.AsQueryable());
+            var mockService = new TaskDailyService(_mockUow.Object, _mapper, _mockUserService.Object);
+            mockService1.Setup(_ => _.GetAll(0)).Returns(mockService.GetAll(0));
+            return mockService1;
         }
     }
 }

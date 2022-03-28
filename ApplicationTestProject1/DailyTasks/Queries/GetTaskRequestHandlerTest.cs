@@ -22,9 +22,9 @@ namespace ApplicationTestProject1.DailyTasks.Queries
         {
             var mappingConfig = new MapperConfiguration(_ => { _.AddProfile<MappingProfile>(); });
             _mapper = mappingConfig.CreateMapper();
-            _mockService = MockTaskService2.GetTaskService2();
+            _mockService = MockTaskService.GetTaskService();
         }
-        [Fact]
+        
         public async Task GetAllTaskHanlerTest()
         {
             var handler = new GetAllTaskDailyQueryHandler(_mockService.Object);

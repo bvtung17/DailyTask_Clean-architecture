@@ -7,17 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationTestProject1.Mock
+namespace TestApplication
 {
-    public static class MockUnitofwork
+    public static class MockUnitOfWork
     {
-      public static Mock<IUnitOfWork> GetUnitOfWork()
+        public static Mock<IUnitOfWork> GetUnitOfWork()
         {
             var mockUow = new Mock<IUnitOfWork>();
             var mockTaskRepo = MockRepository.GetTaskDailyRepository();
-            var mockUserRepo = MockRepository.GetUserRepository();
-            mockUow.Setup(r => r.GetRepository<TaskDaily>()).Returns(mockLeaveTypeRepo.Object);
-            mockUow.Setup(r => r.GetRepository<User>()).Returns(mockLeaveTypeRepo.Object);
+            mockUow.Setup(r => r.GetRepository<TaskDaily>().GetAll()).Returns(mockTaskRepo.Object.GetAll());
+ 
             return mockUow;
         }
     }

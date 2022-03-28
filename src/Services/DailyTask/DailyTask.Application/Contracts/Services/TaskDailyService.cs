@@ -51,20 +51,18 @@ namespace DailyTask.Application.Contracts.Services
         }
 
         public async Task<IReadOnlyList<TaskDailyResponse>> GetAll(int take)
-        {
-            List<TaskDaily> taskDailies = new List<TaskDaily>();
+        {               
             if (take <= 0)
             {
-                taskDailies = await _unitOfWork.GetRepository<TaskDaily>()
-                    .AsQueryable()
-                    .ToListAsync();
+                 var taskDailies = await _unitOfWork.GetRepository<TaskDaily>()
+                 .GetAll();
                 return _mapper.Map<List<TaskDailyResponse>>(taskDailies);
             }
-            taskDailies = await _unitOfWork.GetRepository<TaskDaily>()
+            List<TaskDaily> listTaskDailies = await _unitOfWork.GetRepository<TaskDaily>()
                 .AsQueryable()
                 .Take(take)
                 .ToListAsync();
-            return _mapper.Map<List<TaskDailyResponse>>(taskDailies);
+            return _mapper.Map<List<TaskDailyResponse>>(listTaskDailies);
         }
 
         public async Task<TaskDailyResponse> GetTaskById(int id)

@@ -9,5 +9,6 @@ namespace DailyTask.Application.Contracts.Interfaces.Persistence
         Task<T> AddAsync(T entity);
         T Update(T entity);
         T Delete(T entity);
+        Task<IReadOnlyList<T>> GetAll();
     }
 }
