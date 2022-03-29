@@ -28,12 +28,12 @@ sequenceDiagram
         user -> Controller : CRUD Action
         Controller -> MediatR : Send Request
         alt Request valid
-        MediatR -> Validation : Validation Behavior
-        Validation -> Handler : Command/Query Request
+            MediatR -> Validation : Validation Behavior
+            Validation -> Handler : Command/Query Request
         else Valid Fail
-        Validation --> MediatR : Valid Exeption
-        MediatR --> Controller : Response
-        Controller --> User : Response
+            Validation --> MediatR : Valid Exeption
+            MediatR --> Controller : Response
+            Controller --> User : Response
         end
         Handler -> Service : CRUD Action
         Service -> UnitOfWork : Get Unit of work
@@ -42,24 +42,34 @@ sequenceDiagram
         DB --> Repository : Response
         Repository --> UnitOfWork :  Response 
         alt Create/Update/Delete
-        UnitOfWork -> Db : Save Change
-        Db --> UnitOfWork : Response
-        UnitOfWork --> Service : Response
+            UnitOfWork -> Db : Save Change
+            Db --> UnitOfWork : Response
+            UnitOfWork --> Service : Response
         else Get
-        UnitOfWork --> Service :  Response
+            UnitOfWork --> Service :  Response
         end
         Service --> Handler :  Response
         Handler --> MediatR :  Response
         MediatR --> Controller :  Response
         Controller --> user :  Response 
 ```
-# Over View (CLean Architecture)
+# Over View
+## 1.   CLean Architecture
 ![alt text](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
-### Domain
+### * Domain 
 Entities encapsulate Enterprise wide business rules. 
-### Infrastucture
+1. Enities 
+2. Common
+### * Infrastucture
 Layer of interaction with DataBase
-### Application
+1. DbContext
+2. Repository
+3. EF Configuation
+### * Application
 Data processing layer, login business
-### API
+1. Service
+2. Handler
+3. Interface
+### * API
 Layer receives requests and interacts with users
+1. Controller   
