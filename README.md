@@ -10,7 +10,6 @@
 ### Introduction
 
 # Over View
-<br>
 ### Domain
 Entities encapsulate Enterprise wide business rules. 
 ### Infrastucture
