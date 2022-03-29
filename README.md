@@ -1,20 +1,30 @@
-## uml: sequence diagram
-Here I will embed PlantUML markup to generate a sequence diagram.
+# Web API TaskDaily Project ( Clean Architeture )
+## Tech Using
+1. .NET 6
+2. PostgreSQL
+3. EF Core 
+4. MediatR
+5. FluentVaidation
+6. Auto Mapper
 
-I can include as many plantuml segments as I want in my Markdown, and the diagrams can be of any type supported by PlantUML.
+### Introduction
+### To Use
+#### 1. Require 
+    - Visual Studio
+    - PostgreSQL
+    - Chrome
+    - .Net 6
+#### 2. Change connection String In appseting.json
+    - 
+          "Server=localhost;Database=Test1;Username=USER_NAME;Password=PASS_WORD"
+#### 3. Update DataBase
 
-```plantuml
-@startuml
-    skinparam backgroundColor #EEEBDC
-    skinparam handwritten true
-    actor Customer
-    Customer -> "login()" : username & password
-    "login()" -> Customer : session token
-    activate "login()"
-    Customer -> "placeOrder()" : session token, order info
-    "placeOrder()" -> Customer : ok
-    Customer -> "logout()"
-    "logout()" -> Customer : ok
-    deactivate "login()"
-@enduml
-```
+# Over View
+### Domain
+Entities encapsulate Enterprise wide business rules. 
+### Infrastucture
+Layer of interaction with DataBase
+### Application
+Data processing layer, login business
+### API
+Layer receives requests and interacts with users
