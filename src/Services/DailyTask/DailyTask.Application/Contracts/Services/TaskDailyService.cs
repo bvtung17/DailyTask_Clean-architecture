@@ -78,10 +78,12 @@ namespace DailyTask.Application.Contracts.Services
 
         public async Task<IReadOnlyList<TaskDailyResponse>> GetTaskByUserId(int userId)
         {
+            ///c1 Include
             var tasks = await _unitOfWork.GetRepository<TaskDaily>().AsQueryable()
                 .Include(_ => _.User)
                 .Where(_ => _.UserId == userId).ToListAsync();
-            /////
+
+            ///c2 Join
             var entity1 = _unitOfWork.GetRepository<TaskDaily>().AsQueryable();
             var entity2 = _unitOfWork.GetRepository<User>().AsQueryable();
             var res = await (from x in entity1
@@ -89,34 +91,17 @@ namespace DailyTask.Application.Contracts.Services
             on x.UserId equals y.Id
                        select x
                        ).Where(_ => _.UserId == userId).ToListAsync();
-            //new TaskDailyResponse()
-            //{
-            //    CreatedBy = x.CreatedBy,
-            //    UserId = x.UserId,
-            //    Id = x.Id,
-            //    CreatedDate = x.CreatedDate,
-            //    LastModifiedBy = x.LastModifiedBy,
-            //    LastModifiedDate = x.LastModifiedDate,
-            //    Note = x.Note,
-            //    Status = x.Status,
-            //    TimeEnd = x.TimeEnd,
-            //    TimeStart = x.TimeStart,
-            //    UserResponse = new UserResponse()
-            //    {
-            //        Id = x.Id,
-            //        UserName
-            //    }
 
-            //////////////////////////////////////////////////////////
-            //    var userResponse = await _userService.GetUserById(userId);
-            //if (userResponse == null)
-            //{
-            //    return null;
-            //}
-            //var taskDailies = await _unitOfWork.GetRepository<TaskDaily>()
-            //    .AsQueryable()
-            //    .Where(_ => _.UserId == userId)
-            //    .ToListAsync();
+            ////c3
+            var userResponse = await _userService.GetUserById(userId);
+            if (userResponse == null)
+            {
+                return null;
+            }
+            var taskDailies = await _unitOfWork.GetRepository<TaskDaily>()
+                .AsQueryable()
+                .Where(_ => _.UserId == userId)
+                .ToListAsync();
             return _mapper.Map<List<TaskDailyResponse>>(res);
         }
 
