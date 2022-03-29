@@ -19,7 +19,7 @@
           "Server=localhost;Database=Test1;Username=USER_NAME;Password=PASS_WORD"
 #### 3. Update DataBase
 # Document
-### 1. Work Flow
+### 1. Sequence Diagram 
 ```mermaid
 sequenceDiagram
    
