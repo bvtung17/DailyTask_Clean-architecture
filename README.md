@@ -12,11 +12,10 @@
 # Over View
 <br>
 ### Domain
-- Entities encapsulate Enterprise wide business rules. 
+Entities encapsulate Enterprise wide business rules. 
 ### Infrastucture
-- Layer of interaction with DataBase
+Layer of interaction with DataBase
 ### Application
-- Data processing layer, login business
-### Application
+Data processing layer, login business
 ### API
-- Layer receives requests and interacts with users
+Layer receives requests and interacts with users
