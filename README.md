@@ -7,8 +7,8 @@
 5. FluentVaidation
 6. Auto Mapper
 
-### Introduction
-### To Use
+### 1. Introduction
+### 2. To Use
 #### 1. Require 
     - Visual Studio
     - PostgreSQL
