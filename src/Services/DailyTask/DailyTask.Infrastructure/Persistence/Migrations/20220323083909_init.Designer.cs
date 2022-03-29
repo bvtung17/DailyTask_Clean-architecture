@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DailyTask.Infrastructure.Migrations
 {
     [DbContext(typeof(DailyDbContext))]
-    [Migration("20220318100511_init")]
+    [Migration("20220323083909_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -39,5 +39,10 @@ namespace DailyTask.Infrastructure.Repositories
             _db.Set<T>().Update(entity);
             return entity;
         }
+
+        public async Task<IReadOnlyList<T>> GetAll()
+        {
+            return await _db.Set<T>().ToListAsync();
+        }
     }
 }
