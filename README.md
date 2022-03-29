@@ -8,6 +8,16 @@
 6. Auto Mapper
 
 ### Introduction
+### To Use
+#### 1. Require 
+    - Visual Studio
+    - PostgreSQL
+    - Chrome
+    - .Net 6
+#### 2. Change connection String In appseting.json
+    - 
+          "Server=localhost;Database=Test1;Username=USER_NAME;Password=PASS_WORD"
+#### 3. Update DataBase
 
 # Over View
 ### Domain
