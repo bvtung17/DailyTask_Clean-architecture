@@ -6,7 +6,7 @@
 3. EF Core 
 4. MediatR
 5. FluentVaidation
-6. Repositoy Parten
+6. Repositoy Pattern
 7. Auto Mapper
 
 # Overview
