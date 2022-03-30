@@ -1,13 +1,15 @@
 # Web API TaskDaily Project ( Clean Architeture )
 ##### Web API Manage daily tasks using CleanArchitecture, User can perform CRUD, GetAll, GetById... ##
 ## Tech Using
-1. .NET 6
-2. PostgreSQL
-3. EF Core 
-4. MediatR
-5. FluentVaidation
-6. Repositoy Pattern
-7. Auto Mapper
+1. Clean Architecture Partten
+2. .NET 6
+3. PostgreSQL
+4. EF Core 
+5. MediatR
+6. CQRS Pattern
+7. FluentVaidation
+8. Repositoy Pattern
+9. Auto Mapper
 
 # Overview
 ## 1.   Clean Architecture
