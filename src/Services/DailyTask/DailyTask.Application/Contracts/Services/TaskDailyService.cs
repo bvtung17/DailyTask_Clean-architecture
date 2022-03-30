@@ -41,7 +41,7 @@ namespace DailyTask.Application.Contracts.Services
             var taskDaily = await _unitOfWork.GetRepository<TaskDaily>()
                 .GetByIdAsync(id);
             var result = _unitOfWork.GetRepository<TaskDaily>()
-                .Delete(taskDaily);
+                .DeleteAsync(taskDaily);
             if (result == null)
             {
                 return null;

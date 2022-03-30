@@ -34,7 +34,7 @@ namespace DailyTask.Application.Contracts.Services
             var user = await _unitOfWork.GetRepository<User>()
                 .GetByIdAsync(id);
             var result = _unitOfWork.GetRepository<User>()
-                .Delete(user);
+                .DeleteAsync(user);
             if (result == null)
             {
                 return null;

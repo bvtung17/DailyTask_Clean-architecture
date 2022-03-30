@@ -18,6 +18,7 @@ namespace DailyTask.Infrastructure
             });
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+            services.Decorate(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
             return services;
         }
     }
