@@ -6,7 +6,8 @@
 3. EF Core 
 4. MediatR
 5. FluentVaidation
-6. Auto Mapper
+6. Repositoy Parten
+7. Auto Mapper
 
 # Overview
 ## 1.   Clean Architecture
