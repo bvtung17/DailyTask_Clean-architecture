@@ -1,4 +1,5 @@
 ﻿using DailyTask.Application.Contracts.Interfaces.Persistence;
+using DailyTask.Domain.Entities;
 using DailyTask.Infrastructure.Persistence;
 using DailyTask.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,8 @@ namespace DailyTask.Infrastructure
             });
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-            services.Decorate(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
+            //services.Decorate<IAsyncRepository<TaskDaily>, RepositoryBase<TaskDaily>>();
+            services.AddMemoryCache();
             return services;
         }
     }

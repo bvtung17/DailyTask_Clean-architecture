@@ -2,6 +2,7 @@ using DailyTask.Application.Contracts.Interfaces.Persistence;
 using DailyTask.Domain.Common;
 using DailyTask.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Concurrent;
 
 namespace DailyTask.Infrastructure.Repositories
@@ -9,10 +10,11 @@ namespace DailyTask.Infrastructure.Repositories
     public class RepositoryBase<T> : IAsyncRepository<T> where T : EntityBase
     {
         private readonly DailyDbContext _db;
-        private readonly ConcurrentDictionary<int, T> _cache = new ConcurrentDictionary<int, T>();
-        public RepositoryBase(DailyDbContext db)
+        private readonly IMemoryCache _cache;
+        public RepositoryBase(DailyDbContext db,IMemoryCache cache)
         {
             _db = db;
+            _cache = cache;
         }
         public async Task<T> AddAsync(T entity)
         {
@@ -22,10 +24,10 @@ namespace DailyTask.Infrastructure.Repositories
 
         public T DeleteAsync(T entity)
         {
-            if (_cache.ContainsKey(entity.Id))
+            if (_cache.TryGetValue( entity.Id, out T objecct))
             {
                 _db.Set<T>().Remove(entity);
-                _cache.TryRemove(entity.Id, out entity);
+                _cache.Remove(objecct.Id);
                 return entity;
             }
             _db.Set<T>().Remove(entity);
@@ -37,20 +39,31 @@ namespace DailyTask.Infrastructure.Repositories
              return _db.Set<T>().AsQueryable();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(Guid id)
         {
-            if (_cache.ContainsKey(id))
-            {
-                return _cache[id];
+            if (_cache.TryGetValue(id, out T objecct))
+            {         
+                return objecct;
             }
             var entity = await _db.Set<T>().Where(_ => _.Id == id).FirstOrDefaultAsync();
-            _cache.TryAdd(entity.Id, entity);
+            if (entity == null)
+            {
+                return null;
+            }
+            _cache.Set(entity.Id, entity);
             return entity;
         }
 
         public T Update(T entity)
         {
             _db.Set<T>().Update(entity);
+            if (_cache.TryGetValue(entity.Id, out T objecct))
+            {
+                _cache.Remove(objecct.Id);
+                _cache.Set(entity.Id, entity);
+                return entity;
+            }
+            _cache.Set(entity.Id, entity);
             return entity;
         }
 
