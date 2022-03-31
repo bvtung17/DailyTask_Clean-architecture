@@ -26,7 +26,9 @@ Entities encapsulate Enterprise wide business rules.
 Layer of interaction with DataBase
 1. DbContext
 2. Repository
-3. EF Configuation
+3. Unit of work
+4. Caching
+5. EF Configuation
 ### * Application
 Data processing layer, login business
 1. Service
