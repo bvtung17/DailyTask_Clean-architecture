@@ -50,7 +50,9 @@ namespace DailyTask.Infrastructure.Repositories
 
         public IAsyncRepository<T> GetRepository<T>() where T : EntityBase
         {
+
             return _serviceProvider.GetService<IAsyncRepository<T>>();
+
         }
 
         public void RollbackTransaction()

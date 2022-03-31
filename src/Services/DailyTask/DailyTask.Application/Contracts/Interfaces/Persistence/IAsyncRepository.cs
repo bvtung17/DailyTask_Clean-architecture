@@ -5,10 +5,10 @@ namespace DailyTask.Application.Contracts.Interfaces.Persistence
     public interface IAsyncRepository<T> where T : EntityBase
     {
         IQueryable<T> AsQueryable();
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(Guid id);
         Task<T> AddAsync(T entity);
         T Update(T entity);
-        T Delete(T entity);
+        T DeleteAsync(T entity);
         Task<IReadOnlyList<T>> GetAll();
     }
 }

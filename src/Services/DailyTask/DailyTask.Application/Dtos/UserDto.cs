@@ -1,6 +1,8 @@
-﻿namespace DailyTask.Application.Dtos
+﻿using DailyTask.Domain.Common;
+
+namespace DailyTask.Application.Dtos
 {
-    public class UserDto : EntityBaseDto
+    public class UserDto : EntityBase
     {
         public string UserName { get; set; }
         public string Password { get; set; }

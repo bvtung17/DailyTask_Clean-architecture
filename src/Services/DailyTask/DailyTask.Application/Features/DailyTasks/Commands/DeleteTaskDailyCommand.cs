@@ -5,8 +5,8 @@ namespace DailyTask.Application.Features.DailyTasks.Commands
 {
     public class DeleteTaskDailyCommand : IRequest<TaskDailyResponse>
     {
-        public int Id { get; set; }
-        public DeleteTaskDailyCommand(int id)
+        public Guid Id { get; set; }
+        public DeleteTaskDailyCommand(Guid id)
         {
             Id = id;
         }

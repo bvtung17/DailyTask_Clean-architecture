@@ -2,13 +2,13 @@
 
 namespace DailyTask.Application.Dtos
 {
-    public class TaskDailyDto : EntityBaseDto
+    public class TaskDailyDto : EntityBase
     {
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
         public string Title { get; set; }
         public string Note { get; set; }
         public Status Status { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
     }
 }

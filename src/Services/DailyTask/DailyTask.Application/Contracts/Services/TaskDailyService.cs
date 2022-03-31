@@ -36,12 +36,12 @@ namespace DailyTask.Application.Contracts.Services
             return await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<TaskDailyResponse> DeleteTask(int id)
+        public async Task<TaskDailyResponse> DeleteTask(Guid id)
         {
             var taskDaily = await _unitOfWork.GetRepository<TaskDaily>()
                 .GetByIdAsync(id);
             var result = _unitOfWork.GetRepository<TaskDaily>()
-                .Delete(taskDaily);
+                .DeleteAsync(taskDaily);
             if (result == null)
             {
                 return null;
@@ -65,7 +65,7 @@ namespace DailyTask.Application.Contracts.Services
             return _mapper.Map<List<TaskDailyResponse>>(listTaskDailies);
         }
 
-        public async Task<TaskDailyResponse> GetTaskById(int id)
+        public async Task<TaskDailyResponse> GetTaskById(Guid id)
         {
             var taskDaily = await _unitOfWork.GetRepository<TaskDaily>()
                 .GetByIdAsync(id);
@@ -76,7 +76,7 @@ namespace DailyTask.Application.Contracts.Services
             return _mapper.Map<TaskDailyResponse>(taskDaily);
         }
 
-        public async Task<IReadOnlyList<TaskDailyResponse>> GetTaskByUserId(int userId)
+        public async Task<IReadOnlyList<TaskDailyResponse>> GetTaskByUserId(Guid userId)
         {
             ///c1 Include
             var tasks = await _unitOfWork.GetRepository<TaskDaily>().AsQueryable()

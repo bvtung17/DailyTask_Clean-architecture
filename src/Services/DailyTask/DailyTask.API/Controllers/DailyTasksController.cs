@@ -45,7 +45,7 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpGet("get-task-by-id")]
-        public async Task<IActionResult> GetTaskDailyById([FromQuery] int id)
+        public async Task<IActionResult> GetTaskDailyById([FromQuery] Guid id)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpGet("get-task-by-user-id")]
-        public async Task<IActionResult> GetTaskDailyByUserId([FromQuery] int userId)
+        public async Task<IActionResult> GetTaskDailyByUserId([FromQuery] Guid userId)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpPut("update-task")]
-        public async Task<IActionResult> UpdateTaskDaily(int id, [FromBody] TaskDailyDto taskDailyDto)
+        public async Task<IActionResult> UpdateTaskDaily(Guid id, [FromBody] TaskDailyDto taskDailyDto)
         {
             try
             {
@@ -144,7 +144,7 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpDelete("delete-task")]
-        public async Task<IActionResult> DeleteTaskDaily([FromQuery] int id)
+        public async Task<IActionResult> DeleteTaskDaily([FromQuery] Guid id)
         {
             try
             {

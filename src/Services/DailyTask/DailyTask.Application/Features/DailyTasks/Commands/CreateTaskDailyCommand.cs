@@ -11,6 +11,6 @@ namespace DailyTask.Application.Features.DailyTasks.Commands
         public string Title { get; set; }
         public string Note { get; set; }
         public Status Status { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
     }
 }
