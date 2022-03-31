@@ -9,7 +9,8 @@
 6. CQRS Pattern
 7. FluentVaidation
 8. Repositoy Pattern
-9. Auto Mapper
+9. Cashing with Hangfire
+10. Auto Mapper
 
 # Overview
 ## 1.   Clean Architecture
@@ -38,23 +39,23 @@ Layer receives requests and interacts with users
 
 
 
-| API Daily Task                               | Description                 | Reqeust Body           | Response Body      |
-| :---                                         |    :----                    |   :---:                |  :----:            |
-| Get /get-all-task?take={take}                | Get all Daily tasks         |  int take              | List of Daily Task |
-| Get /get-task-by-id?id={id}                  | Get Daily tasks by id       |  int id                | Daily Task Response|
-| Get /get-task-by-user-id?userId={userId}     | Get Daily tasks by userId   |  int userId            | List of Daily Task |
-| Post /create-task                            | Create Daily task           |  TaskDailyDto          | Daily Task Response|
-| Put /update-task?id={id}                     | Update Daily task           |  int id; TaskDailyDto  | Daily Task Response|
-| Delete /delete-task?id=                      | Delete Daily task           |  int id                |Daily Task Response |
+| API Daily Task                               | Description                 | Reqeust Body            | Response Body      |
+| :---                                         |    :----                    |   :---:                 |  :----:            |
+| Get /get-all-task?take={take}                | Get all tasks               |  int take               | List of Task       |
+| Get /get-task-by-id?id={id}                  | Get Daily tasks by id       |  Guid id                | Daily Task Response|
+| Get /get-task-by-user-id?userId={userId}     | Get Daily tasks by userId   |  Guid userId            | List of Daily Task |
+| Post /create-task                            | Create Daily task           |  TaskDailyDto           | Daily Task Response|
+| Put /update-task?id={id}                     | Update Daily task           |  Guid id; TaskDailyDto  | Daily Task Response|
+| Delete /delete-task?id=                      | Delete Daily task           |  Guid id                |Daily Task Response |
 
 
 | API User                                     | Description                 | Reqeust Body           | Response Body      |
 | :---                                         |    :----                    |   :---:                |  :----:            |
 | Get /get-all-user?take={take}                | Get all user                |  int take              | List of User       |
-| Get /get-user-by-id?id={id}                  | Get user by id              |  int id                | User Response      |
+| Get /get-user-by-id?id={id}                  | Get user by id              |  Guid id               | User Response      |
 | Post /create-user                            | Create user                 |  UserDto               | User Response      |
-| Put /update-user?id={id}                     | Update user                 |  int id; UserDto       | User Response      |
-| Delete /delete-user?id=                      | Delete user                 |  int id                | User Response      |
+| Put /update-user?id={id}                     | Update user                 |  Guid id; UserDto      | User Response      |
+| Delete /delete-user?id=                      | Delete user                 |  Guid id               | User Response      |
 
 
 ### 2. To Use
