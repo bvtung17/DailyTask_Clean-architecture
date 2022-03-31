@@ -3,8 +3,6 @@ using DailyTask.Application.Dtos;
 using DailyTask.Application.Features.DailyTasks.Commands;
 using DailyTask.Application.Features.DailyTasks.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace DailyTask.API.Controllers
 {
@@ -47,7 +45,7 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpGet("get-user-by-id")]
-        public async Task<IActionResult> GetUserById([FromQuery] int id)
+        public async Task<IActionResult> GetUserById([FromQuery] Guid id)
         {
             try
             {
@@ -96,7 +94,7 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpPut("update-ưser")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserDto userDto)
+        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserDto userDto)
         {
             try
             {
@@ -121,7 +119,7 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpDelete("delete-user")]
-        public async Task<IActionResult> DeleteUser([FromQuery] int id)
+        public async Task<IActionResult> DeleteUser([FromQuery] Guid id)
         {
             try
             {

@@ -29,7 +29,7 @@ namespace DailyTask.Application.Contracts.Services
             return await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<UserResponse> DeleteUser(int id)
+        public async Task<UserResponse> DeleteUser(Guid id)
         {
             var user = await _unitOfWork.GetRepository<User>()
                 .GetByIdAsync(id);
@@ -60,7 +60,7 @@ namespace DailyTask.Application.Contracts.Services
             return _mapper.Map<List<UserResponse>>(users);
         }
 
-        public async Task<UserResponse> GetUserById(int id)
+        public async Task<UserResponse> GetUserById(Guid id)
         {
             var user = await _unitOfWork.GetRepository<User>().GetByIdAsync(id);
             return _mapper.Map<UserResponse>(user);

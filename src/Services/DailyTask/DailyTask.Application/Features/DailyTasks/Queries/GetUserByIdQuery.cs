@@ -5,8 +5,8 @@ namespace DailyTask.Application.Features.DailyTasks.Queries
 {
     public class GetUserByIdQuery : IRequest<UserResponse>
     {
-        public int Id { get; set; }
-        public GetUserByIdQuery(int id)
+        public Guid Id { get; set; }
+        public GetUserByIdQuery(Guid id)
         {
             Id = id;
         }

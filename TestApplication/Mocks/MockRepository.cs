@@ -18,19 +18,19 @@ namespace TestApplication
                     TimeEnd = DateTime.Now,
                     TimeStart = DateTime.Now,
                     Title = "Xin Chào",
-                    UserId = 4,
+                    UserId = new Guid(),
                 },
                 new TaskDaily {
                     TimeEnd = DateTime.Now,
                     TimeStart = DateTime.Now,
                     Title = "Xin Chào 2",
-                    UserId = 4,
+                    UserId = new Guid(),
                 },
                 new TaskDaily {
                     TimeEnd = DateTime.Now,
                     TimeStart = DateTime.Now,
                     Title = "Xin Chào 3",
-                    UserId = 4,
+                    UserId = new Guid(),
                 },
             };
             var mockRepo = new Mock<IAsyncRepository<TaskDaily>>();
