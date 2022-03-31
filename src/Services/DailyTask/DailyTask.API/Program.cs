@@ -3,6 +3,7 @@ using AutoMapper;
 using DailyTask.Application;
 using DailyTask.Application.Mappings;
 using DailyTask.Infrastructure;
+using Hangfire;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,7 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseHangfireDashboard("/jobs");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

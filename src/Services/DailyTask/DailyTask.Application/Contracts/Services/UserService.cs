@@ -45,19 +45,16 @@ namespace DailyTask.Application.Contracts.Services
 
         public async Task<IReadOnlyList<UserResponse>> GetAll(int take)
         {
-            List<User> users = new List<User>();
             if (take <= 0)
             {
-                users = await _unitOfWork.GetRepository<User>()
-                    .AsQueryable()
-                    .ToListAsync();
+                var users = await _unitOfWork.GetRepository<User>()
+                    .GetAll();
                 return _mapper.Map<List<UserResponse>>(users);
             }
-            users = await _unitOfWork.GetRepository<User>()
-                .AsQueryable()
-                .Take(take)
-                .ToListAsync();
-            return _mapper.Map<List<UserResponse>>(users);
+            var userTakes = await _unitOfWork.GetRepository<User>()
+                .GetAll();
+            userTakes = userTakes.Take(take).ToList();
+            return _mapper.Map<List<UserResponse>>(userTakes);
         }
 
         public async Task<UserResponse> GetUserById(Guid id)
