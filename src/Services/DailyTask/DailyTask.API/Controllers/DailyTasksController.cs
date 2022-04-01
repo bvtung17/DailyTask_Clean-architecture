@@ -24,7 +24,7 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                GetAllTaskDailyQuery requestModel = new GetAllTaskDailyQuery(take);
+                GetAllTaskDailyQuery requestModel = new(take);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -37,11 +37,7 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
         }
         [HttpGet("get-task-by-id")]
@@ -49,7 +45,7 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                GetTaskDailyByIdQuery requestModel = new GetTaskDailyByIdQuery(id);
+                GetTaskDailyByIdQuery requestModel = new(id);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -62,11 +58,7 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
         }
         [HttpGet("get-task-by-user-id")]
@@ -74,7 +66,7 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                GetTaskDailyByUserIdQuery requestModel = new GetTaskDailyByUserIdQuery(userId);
+                GetTaskDailyByUserIdQuery requestModel = new(userId);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -87,11 +79,7 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
         }
         [HttpPost("create-task")]
@@ -99,10 +87,6 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
                 CreateTaskDailyCommand requestModel = _mapper.Map<CreateTaskDailyCommand>(taskDailyDto);
                 var result = await _mediator.Send(requestModel);
                 _response.DisplayMessage = "Sucessfully!";
@@ -111,11 +95,7 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
         }
         [HttpPut("update-task")]
@@ -123,10 +103,6 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
                 UpdateTaskDailyCommand requestModel = _mapper.Map<UpdateTaskDailyCommand>(taskDailyDto);
                 requestModel.Id = id;
                 var result = await _mediator.Send(requestModel);
@@ -136,11 +112,7 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
         }
         [HttpDelete("delete-task")]
@@ -148,7 +120,7 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                DeleteTaskDailyCommand requestModel = new DeleteTaskDailyCommand(id);
+                DeleteTaskDailyCommand requestModel = new(id);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -161,12 +133,16 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
+        }
+        private IActionResult ExceptionError(Exception e)
+        {
+            _response.Result = null;
+            _response.DisplayMessage = "Error!";
+            _response.IsSuccess = false;
+            _response.ErrorMessages = new List<string>() { e.Message };
+            return BadRequest(_response);
         }
     }
 }

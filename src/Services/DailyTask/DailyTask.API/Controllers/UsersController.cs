@@ -24,7 +24,7 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                GetAllUserQuery requestModel = new GetAllUserQuery(take);
+                GetAllUserQuery requestModel = new (take);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -37,11 +37,7 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
         }
         [HttpGet("get-user-by-id")]
@@ -49,7 +45,7 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                GetUserByIdQuery requestModel = new GetUserByIdQuery(id);
+                GetUserByIdQuery requestModel = new (id);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -62,11 +58,7 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
         }
         [HttpPost("create-user")]
@@ -86,14 +78,10 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
         }
-        [HttpPut("update-ưser")]
+        [HttpPut("update-user")]
         public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserDto userDto)
         {
             try
@@ -111,11 +99,7 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+                return ExceptionError(e);
             }
         }
         [HttpDelete("delete-user")]
@@ -123,7 +107,7 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                DeleteUserCommand requestModel = new DeleteUserCommand(id);
+                DeleteUserCommand requestModel = new (id);
                 var result = await _mediator.Send(requestModel);
                 if (result == null)
                 {
@@ -136,12 +120,16 @@ namespace DailyTask.API.Controllers
             }
             catch (Exception e)
             {
-                _response.Result = null;
-                _response.DisplayMessage = "Error!";
-                _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.Message };
-                return BadRequest(_response);
+               return ExceptionError(e);
             }
+        }
+        private IActionResult ExceptionError(Exception e)
+        {
+            _response.Result = null;
+            _response.DisplayMessage = "Error!";
+            _response.IsSuccess = false;
+            _response.ErrorMessages = new List<string>() { e.Message };
+            return BadRequest(_response);
         }
     }
 }
