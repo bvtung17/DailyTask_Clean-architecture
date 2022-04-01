@@ -25,15 +25,7 @@ namespace DailyTask.API.Controllers
             try
             {
                 GetAllUserQuery requestModel = new (take);
-                var result = await _mediator.Send(requestModel);
-                if (result == null)
-                {
-                    _response.IsSuccess = false;
-                    return BadRequest(_response);
-                }
-                _response.Result = result;
-                _response.DisplayMessage = "Sucessfully!";
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
@@ -41,20 +33,12 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpGet("get-user-by-id")]
-        public async Task<IActionResult> GetUserById([FromQuery] Guid id)
+        public async Task<IActionResult> GetUserById(Guid id)
         {
             try
             {
                 GetUserByIdQuery requestModel = new (id);
-                var result = await _mediator.Send(requestModel);
-                if (result == null)
-                {
-                    _response.IsSuccess = false;
-                    return BadRequest(_response);
-                }
-                _response.Result = result;
-                _response.DisplayMessage = "Sucessfully!";
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
@@ -71,10 +55,7 @@ namespace DailyTask.API.Controllers
                     return BadRequest(ModelState);
                 }
                 CreateUserCommand requestModel = _mapper.Map<CreateUserCommand>(userDto);
-                var result = await _mediator.Send(requestModel);
-                _response.DisplayMessage = "Sucessfully!";
-                _response.Result = result;
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
@@ -92,10 +73,7 @@ namespace DailyTask.API.Controllers
                 }
                 UpdateUserCommand requestModel = _mapper.Map<UpdateUserCommand>(userDto);
                 requestModel.Id = id;
-                var result = await _mediator.Send(requestModel);
-                _response.DisplayMessage = "Sucessfully!";
-                _response.Result = result;
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
@@ -108,20 +86,24 @@ namespace DailyTask.API.Controllers
             try
             {
                 DeleteUserCommand requestModel = new (id);
-                var result = await _mediator.Send(requestModel);
-                if (result == null)
-                {
-                    _response.IsSuccess = false;
-                    return BadRequest(_response);
-                }
-                _response.Result = result;
-                _response.DisplayMessage = "Sucessfully!";
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
                return ExceptionError(e);
             }
+        }
+        private async Task<IActionResult> CheckResult(object model)
+        {
+            var result = await _mediator.Send(model);
+            if (result == null)
+            {
+                _response.IsSuccess = false;
+                return BadRequest(_response);
+            }
+            _response.Result = result;
+            _response.DisplayMessage = "Sucessfully!";
+            return Ok(_response);
         }
         private IActionResult ExceptionError(Exception e)
         {

@@ -25,15 +25,7 @@ namespace DailyTask.API.Controllers
             try
             {
                 GetAllTaskDailyQuery requestModel = new(take);
-                var result = await _mediator.Send(requestModel);
-                if (result == null)
-                {
-                    _response.IsSuccess = false;
-                    return BadRequest(_response);
-                }
-                _response.Result = result;
-                _response.DisplayMessage = "Sucessfully!";
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
@@ -46,15 +38,7 @@ namespace DailyTask.API.Controllers
             try
             {
                 GetTaskDailyByIdQuery requestModel = new(id);
-                var result = await _mediator.Send(requestModel);
-                if (result == null)
-                {
-                    _response.IsSuccess = false;
-                    return BadRequest(_response);
-                }
-                _response.Result = result;
-                _response.DisplayMessage = "Sucessfully!";
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
@@ -62,20 +46,12 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpGet("get-task-by-user-id")]
-        public async Task<IActionResult> GetTaskDailyByUserId([FromQuery] Guid userId)
+        public async Task<IActionResult> GetTaskDailyByUserId(Guid userId)
         {
             try
             {
                 GetTaskDailyByUserIdQuery requestModel = new(userId);
-                var result = await _mediator.Send(requestModel);
-                if (result == null)
-                {
-                    _response.IsSuccess = false;
-                    return BadRequest(_response);
-                }
-                _response.Result = result;
-                _response.DisplayMessage = "Sucessfully!";
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
@@ -88,10 +64,7 @@ namespace DailyTask.API.Controllers
             try
             {
                 CreateTaskDailyCommand requestModel = _mapper.Map<CreateTaskDailyCommand>(taskDailyDto);
-                var result = await _mediator.Send(requestModel);
-                _response.DisplayMessage = "Sucessfully!";
-                _response.Result = result;
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
@@ -105,10 +78,7 @@ namespace DailyTask.API.Controllers
             {
                 UpdateTaskDailyCommand requestModel = _mapper.Map<UpdateTaskDailyCommand>(taskDailyDto);
                 requestModel.Id = id;
-                var result = await _mediator.Send(requestModel);
-                _response.DisplayMessage = "Sucessfully!";
-                _response.Result = result;
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
@@ -121,20 +91,24 @@ namespace DailyTask.API.Controllers
             try
             {
                 DeleteTaskDailyCommand requestModel = new(id);
-                var result = await _mediator.Send(requestModel);
-                if (result == null)
-                {
-                    _response.IsSuccess = false;
-                    return BadRequest(_response);
-                }
-                _response.Result = result;
-                _response.DisplayMessage = "Sucessfully!";
-                return Ok(_response);
+                return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
                 return ExceptionError(e);
             }
+        }
+        private async Task<IActionResult> CheckResult(object model)
+        {
+            var result = await _mediator.Send(model);
+            if (result == null)
+            {
+                _response.IsSuccess = false;
+                return BadRequest(_response);
+            }
+            _response.Result = result;
+            _response.DisplayMessage = "Sucessfully!";
+            return Ok(_response);
         }
         private IActionResult ExceptionError(Exception e)
         {
