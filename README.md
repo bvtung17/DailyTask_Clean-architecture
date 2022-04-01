@@ -93,8 +93,8 @@ sequenceDiagram
         Handler -> Service : CRUD Action
         Service -> UnitOfWork : Get Unit of work
         UnitOfWork -> Repository : Get Repository
-        Repository -> DB : CRUD Action 
-        DB --> Repository : Response
+        Repository -> Db : CRUD Action 
+        Db--> Repository : Response
         Repository --> UnitOfWork :  Response 
         alt Create/Update/Delete
             UnitOfWork -> Db : Save Change
