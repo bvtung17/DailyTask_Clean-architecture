@@ -24,7 +24,7 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                GetAllUserQuery requestModel = new (take);
+                GetAllUserQuery requestModel = new(take);
                 return await CheckResult(requestModel);
             }
             catch (Exception e)
@@ -37,7 +37,7 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                GetUserByIdQuery requestModel = new (id);
+                GetUserByIdQuery requestModel = new(id);
                 return await CheckResult(requestModel);
             }
             catch (Exception e)
@@ -77,12 +77,12 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                DeleteUserCommand requestModel = new (id);
+                DeleteUserCommand requestModel = new(id);
                 return await CheckResult(requestModel);
             }
             catch (Exception e)
             {
-               return ExceptionError(e);
+                return ExceptionError(e);
             }
         }
         private async Task<IActionResult> CheckResult(object model)
@@ -107,4 +107,3 @@ namespace DailyTask.API.Controllers
         }
     }
 }
-   

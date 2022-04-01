@@ -22,7 +22,7 @@ namespace DailyTask.Application.Features.DailyTasks.Handlers
             {
                 return null;
             }
-            return _mapper.Map<UserResponse>(request);  
+            return _mapper.Map<UserResponse>(request);
         }
     }
 }

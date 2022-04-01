@@ -87,9 +87,9 @@ namespace DailyTask.Application.Contracts.Services
             var entity1 = _unitOfWork.GetRepository<TaskDaily>().AsQueryable();
             var entity2 = _unitOfWork.GetRepository<User>().AsQueryable();
             var res = await (from x in entity1
-                       join y in entity2
-            on x.UserId equals y.Id
-                       select x
+                             join y in entity2
+                  on x.UserId equals y.Id
+                             select x
                        ).Where(_ => _.UserId == userId).ToListAsync();
 
             ////c3

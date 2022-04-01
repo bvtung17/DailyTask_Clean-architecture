@@ -4,7 +4,6 @@ using DailyTask.Application.Contracts.Interfaces.Persistence;
 using DailyTask.Application.Features.DailyTasks.Commands;
 using DailyTask.Application.Responses;
 using DailyTask.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace DailyTask.Application.Contracts.Services
 {
