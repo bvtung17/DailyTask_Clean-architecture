@@ -22,81 +22,39 @@ namespace DailyTask.API.Controllers
         [HttpGet("get-all-task")]
         public async Task<IActionResult> GetAllTaskDaily([FromQuery] int take = 0)
         {
-            try
-            {
                 GetAllTaskDailyQuery requestModel = new(take);
                 return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
         }
         [HttpGet("get-task-by-id")]
         public async Task<IActionResult> GetTaskDailyById([FromQuery] Guid id)
         {
-            try
-            {
                 GetTaskDailyByIdQuery requestModel = new(id);
                 return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
         }
         [HttpGet("get-task-by-user-id")]
         public async Task<IActionResult> GetTaskDailyByUserId(Guid userId)
         {
-            try
-            {
                 GetTaskDailyByUserIdQuery requestModel = new(userId);
                 return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
         }
         [HttpPost("create-task")]
         public async Task<IActionResult> AddTaskDaily([FromBody] TaskDailyDto taskDailyDto)
         {
-            try
-            {
                 CreateTaskDailyCommand requestModel = _mapper.Map<CreateTaskDailyCommand>(taskDailyDto);
                 return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
         }
         [HttpPut("update-task")]
         public async Task<IActionResult> UpdateTaskDaily(Guid id, [FromBody] TaskDailyDto taskDailyDto)
         {
-            try
-            {
                 UpdateTaskDailyCommand requestModel = _mapper.Map<UpdateTaskDailyCommand>(taskDailyDto);
                 requestModel.Id = id;
                 return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
         }
         [HttpDelete("delete-task")]
         public async Task<IActionResult> DeleteTaskDaily([FromQuery] Guid id)
         {
-            try
-            {
                 DeleteTaskDailyCommand requestModel = new(id);
-                return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
+                return await CheckResult(requestModel);         
         }
         private async Task<IActionResult> CheckResult(object model)
         {
@@ -109,14 +67,6 @@ namespace DailyTask.API.Controllers
             _response.Result = result;
             _response.DisplayMessage = "Sucessfully!";
             return Ok(_response);
-        }
-        private IActionResult ExceptionError(Exception e)
-        {
-            _response.Result = null;
-            _response.DisplayMessage = "Error!";
-            _response.IsSuccess = false;
-            _response.ErrorMessages = new List<string>() { e.Message };
-            return BadRequest(_response);
-        }
+        }    
     }
 }

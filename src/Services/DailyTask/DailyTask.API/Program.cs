@@ -1,10 +1,13 @@
+using System.Net;
 using System.Reflection;
 using AutoMapper;
 using DailyTask.Application;
+using DailyTask.Application.Exceptions;
 using DailyTask.Application.Mappings;
 using DailyTask.Infrastructure;
 using Hangfire;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +48,7 @@ app.UseHangfireDashboard("/jobs");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.MapControllers();
 
 app.Run();
