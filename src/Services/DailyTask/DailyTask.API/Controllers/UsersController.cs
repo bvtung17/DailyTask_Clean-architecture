@@ -20,7 +20,7 @@ namespace DailyTask.API.Controllers
             this._response = new ResponseDto();
         }
         [HttpGet("get-all-user")]
-        public async Task<IActionResult> GetAllTaskDaily([FromQuery] int take = 0)
+        public async Task<IActionResult> GetAllUser([FromQuery] int take = 0)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace DailyTask.API.Controllers
             }
         }
         [HttpGet("get-user-by-id")]
-        public async Task<IActionResult> GetUserById(Guid id)
+        public async Task<IActionResult> GetUserById([FromQuery] Guid id)
         {
             try
             {
@@ -50,10 +50,6 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
                 CreateUserCommand requestModel = _mapper.Map<CreateUserCommand>(userDto);
                 return await CheckResult(requestModel);
             }
@@ -67,10 +63,6 @@ namespace DailyTask.API.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
                 UpdateUserCommand requestModel = _mapper.Map<UpdateUserCommand>(userDto);
                 requestModel.Id = id;
                 return await CheckResult(requestModel);
