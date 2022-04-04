@@ -88,7 +88,7 @@ sequenceDiagram
         else Valid Fail
             Validation --> MediatR : Valid Exeption
             MediatR --> Controller : Response
-            Controller --> User : Response
+            Controller --> user : Response
         end
         Handler -> Service : CRUD Action
         Service -> UnitOfWork : Get Unit of work
