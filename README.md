@@ -1,16 +1,19 @@
 # Web API TaskDaily Project ( Clean Architeture )
+## Purpose of this Project
+##### [OJT Team] This is a learning project to prepare for my participation in a big project.
 ##### Web API Manage daily tasks using CleanArchitecture, User can perform CRUD, GetAll, GetById... ##
 ## Tech Using
 1. Clean Architecture Partten
 2. .NET 6
 3. PostgreSQL
-4. EF Core 
-5. MediatR
-6. CQRS Pattern
-7. FluentVaidation
-8. Repositoy Pattern
-9. Cashing with Hangfire
+4. EF Core - Code First
+5. MediatR Pipeline Validation
+6. CQRS with MediatR Library
+7. Fluent Vaidation
+8. Repositoy Pattern - Unit Of Work
+9. Cashing Memory
 10. Auto Mapper
+11. Swagger UI
 
 # Overview
 ## 1.   Clean Architecture
@@ -90,8 +93,8 @@ sequenceDiagram
         Handler -> Service : CRUD Action
         Service -> UnitOfWork : Get Unit of work
         UnitOfWork -> Repository : Get Repository
-        Repository -> DB : CRUD Action 
-        DB --> Repository : Response
+        Repository -> Db : CRUD Action 
+        Db--> Repository : Response
         Repository --> UnitOfWork :  Response 
         alt Create/Update/Delete
             UnitOfWork -> Db : Save Change

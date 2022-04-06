@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DailyTask.Application.Contracts.Interfaces.IServices;
+﻿using DailyTask.Application.Contracts.Interfaces.IServices;
 using DailyTask.Application.Features.DailyTasks.Queries;
 using DailyTask.Application.Responses;
 using MediatR;

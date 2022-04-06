@@ -26,7 +26,7 @@ namespace DailyTask.API.Controllers
                 return await CheckResult(requestModel);
         }
         [HttpGet("get-user-by-id")]
-        public async Task<IActionResult> GetUserById(Guid id)
+        public async Task<IActionResult> GetUserById([FromQuery] Guid id)
         {
                 GetUserByIdQuery requestModel = new (id);
                 return await CheckResult(requestModel);
@@ -64,4 +64,3 @@ namespace DailyTask.API.Controllers
         }
     }
 }
-   
