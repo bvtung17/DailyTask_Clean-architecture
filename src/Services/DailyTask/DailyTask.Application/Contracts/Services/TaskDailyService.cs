@@ -19,7 +19,7 @@ namespace DailyTask.Application.Contracts.Services
             _mapper = mapper;
             _userService = userService;
         }
-        public async Task<int> AddTask(CreateTaskDailyCommand request)
+        public async Task<int> AddTask(CreateTaskDailyCommand request, CancellationToken cancellationToken)
         {
             var taskDaily = _mapper.Map<TaskDaily>(request);
             var userResponse = await _userService.GetUserById(request.UserId);
@@ -33,10 +33,10 @@ namespace DailyTask.Application.Contracts.Services
             {
                 return 0;
             }
-            return await _unitOfWork.SaveChangesAsync();
+            return await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<TaskDailyResponse> DeleteTask(Guid id)
+        public async Task<TaskDailyResponse> DeleteTask(Guid id, CancellationToken cancellationToken)
         {
             var taskDaily = await _unitOfWork.GetRepository<TaskDaily>()
                 .GetByIdAsync(id);
@@ -46,7 +46,7 @@ namespace DailyTask.Application.Contracts.Services
             {
                 return null;
             }
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             return _mapper.Map<TaskDailyResponse>(taskDaily);
         }
 
@@ -105,7 +105,7 @@ namespace DailyTask.Application.Contracts.Services
             return _mapper.Map<List<TaskDailyResponse>>(res);
         }
 
-        public async Task<int> UpdateTask(UpdateTaskDailyCommand updateTaskDailyCommand)
+        public async Task<int> UpdateTask(UpdateTaskDailyCommand updateTaskDailyCommand, CancellationToken cancellationToken)
         {
             var taskDaily = await _unitOfWork.GetRepository<TaskDaily>()
                 .GetByIdAsync(updateTaskDailyCommand.Id);
@@ -120,7 +120,7 @@ namespace DailyTask.Application.Contracts.Services
             {
                 return 0;
             }
-            return await _unitOfWork.SaveChangesAsync();
+            return await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace DailyTask.Application.Features.DailyTasks.Handlers
         }
         public async Task<UserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            int result = await _userServices.AddUser(request);
+            int result = await _userServices.AddUser(request, cancellationToken);
             if (result <= 0)
             {
                 return null;

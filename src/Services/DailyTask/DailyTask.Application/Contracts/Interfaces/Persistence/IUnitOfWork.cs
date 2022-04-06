@@ -9,6 +9,6 @@ namespace DailyTask.Application.Contracts.Interfaces.Persistence
         void RollbackTransaction();
         IAsyncRepository<T> GetRepository<T>()
             where T : EntityBase;
-        Task<int> SaveChangesAsync();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

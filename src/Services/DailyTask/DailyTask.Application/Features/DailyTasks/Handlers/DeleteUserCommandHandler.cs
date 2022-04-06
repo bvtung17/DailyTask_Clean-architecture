@@ -14,7 +14,7 @@ namespace DailyTask.Application.Features.DailyTasks.Handlers
         }
         public async Task<UserResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            UserResponse user = await _userServices.DeleteUser(request.Id);
+            UserResponse user = await _userServices.DeleteUser(request.Id, cancellationToken);
             if (user == null)
             {
                 return null;

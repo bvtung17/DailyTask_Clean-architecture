@@ -14,7 +14,7 @@ namespace DailyTask.Application.Features.DailyTasks.Handlers
         }
         public async Task<TaskDailyResponse> Handle(DeleteTaskDailyCommand request, CancellationToken cancellationToken)
         {
-            TaskDailyResponse taskDaily = await _taskDailyService.DeleteTask(request.Id);
+            TaskDailyResponse taskDaily = await _taskDailyService.DeleteTask(request.Id, cancellationToken);
             if (taskDaily == null)
             {
                 return null;

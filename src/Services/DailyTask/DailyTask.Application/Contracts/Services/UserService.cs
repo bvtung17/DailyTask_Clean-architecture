@@ -16,7 +16,7 @@ namespace DailyTask.Application.Contracts.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<int> AddUser(CreateUserCommand createUserCommand)
+        public async Task<int> AddUser(CreateUserCommand createUserCommand, CancellationToken cancellationToken)
         {
             var user = _mapper.Map<User>(createUserCommand);
             var result = await _unitOfWork.GetRepository<User>()
@@ -25,10 +25,10 @@ namespace DailyTask.Application.Contracts.Services
             {
                 return 0;
             }
-            return await _unitOfWork.SaveChangesAsync();
+            return await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<UserResponse> DeleteUser(Guid id)
+        public async Task<UserResponse> DeleteUser(Guid id, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.GetRepository<User>()
                 .GetByIdAsync(id);
@@ -38,7 +38,7 @@ namespace DailyTask.Application.Contracts.Services
             {
                 return null;
             }
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             return _mapper.Map<UserResponse>(user);
         }
 
@@ -62,7 +62,7 @@ namespace DailyTask.Application.Contracts.Services
             return _mapper.Map<UserResponse>(user);
         }
 
-        public async Task<int> UpdateUser(UpdateUserCommand updateUserCommand)
+        public async Task<int> UpdateUser(UpdateUserCommand updateUserCommand, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.GetRepository<User>()
                 .GetByIdAsync(updateUserCommand.Id);
@@ -77,7 +77,7 @@ namespace DailyTask.Application.Contracts.Services
             {
                 return 0;
             }
-            return await _unitOfWork.SaveChangesAsync();
+            return await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

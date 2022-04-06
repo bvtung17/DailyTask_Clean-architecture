@@ -64,9 +64,9 @@ namespace DailyTask.Infrastructure.Repositories
             }
         }
 
-        public async Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            return await _db.SaveChangesAsync();
+            return await _db.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace DailyTask.Application.Contracts.Interfaces.IServices
         Task<IReadOnlyList<TaskDailyResponse>> GetAll(int take);
         Task<TaskDailyResponse> GetTaskById(Guid id);
         Task<IReadOnlyList<TaskDailyResponse>> GetTaskByUserId(Guid userId);
-        Task<TaskDailyResponse> DeleteTask(Guid id);
-        Task<int> AddTask(CreateTaskDailyCommand request);
-        Task<int> UpdateTask(UpdateTaskDailyCommand updateTaskDailyCommand);
+        Task<TaskDailyResponse> DeleteTask(Guid id, CancellationToken cancellationToken);
+        Task<int> AddTask(CreateTaskDailyCommand request, CancellationToken cancellationToken);
+        Task<int> UpdateTask(UpdateTaskDailyCommand updateTaskDailyCommand, CancellationToken cancellationToken);
     }
 }

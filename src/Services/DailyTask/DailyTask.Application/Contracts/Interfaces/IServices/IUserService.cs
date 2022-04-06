@@ -9,9 +9,9 @@ namespace DailyTask.Application.Contracts.Interfaces.IServices
     {
         Task<IReadOnlyList<UserResponse>> GetAll(int take);
         Task<UserResponse> GetUserById(Guid id);
-        Task<UserResponse> DeleteUser(Guid id);
-        Task<int> AddUser(CreateUserCommand createUserCommand);
-        Task<int> UpdateUser(UpdateUserCommand updateUserCommand);
+        Task<UserResponse> DeleteUser(Guid id, CancellationToken cancellationToken);
+        Task<int> AddUser(CreateUserCommand createUserCommand, CancellationToken cancellationToken);
+        Task<int> UpdateUser(UpdateUserCommand updateUserCommand, CancellationToken cancellationToken);
 
     }
 }

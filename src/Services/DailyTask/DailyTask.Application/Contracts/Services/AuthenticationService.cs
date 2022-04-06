@@ -38,7 +38,7 @@ namespace DailyTask.Application.Contracts.Services
             userDto.Password = CreatePasswordMD5.GenerateHash(userDto.Password);
             User user = _mapper.Map<User>(userDto);
             await _unitOfWork.GetRepository<User>().AddAsync(user);
-            return await _unitOfWork.SaveChangesAsync();
+            return 1;
         }
     }
 }

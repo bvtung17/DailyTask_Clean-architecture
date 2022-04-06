@@ -17,7 +17,7 @@ namespace DailyTask.Application.Features.DailyTasks.Handlers
         }
         public async Task<TaskDailyResponse> Handle(CreateTaskDailyCommand request, CancellationToken cancellationToken)
         {
-            int result = await _taskDailyService.AddTask(request);
+            int result = await _taskDailyService.AddTask(request, cancellationToken);
             if (result <= 0)
             {
                 return null;
