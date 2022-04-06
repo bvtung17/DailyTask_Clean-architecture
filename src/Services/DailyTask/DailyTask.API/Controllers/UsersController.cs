@@ -22,68 +22,33 @@ namespace DailyTask.API.Controllers
         [HttpGet("get-all-user")]
         public async Task<IActionResult> GetAllUser([FromQuery] int take = 0)
         {
-            try
-            {
-                GetAllUserQuery requestModel = new(take);
+                GetAllUserQuery requestModel = new (take);
                 return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
         }
         [HttpGet("get-user-by-id")]
         public async Task<IActionResult> GetUserById([FromQuery] Guid id)
         {
-            try
-            {
-                GetUserByIdQuery requestModel = new(id);
+                GetUserByIdQuery requestModel = new (id);
                 return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
         }
         [HttpPost("create-user")]
         public async Task<IActionResult> AddUser([FromBody] UserDto userDto)
         {
-            try
-            {
                 CreateUserCommand requestModel = _mapper.Map<CreateUserCommand>(userDto);
                 return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
         }
         [HttpPut("update-user")]
         public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserDto userDto)
         {
-            try
-            {
                 UpdateUserCommand requestModel = _mapper.Map<UpdateUserCommand>(userDto);
                 requestModel.Id = id;
-                return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
+                return await CheckResult(requestModel);         
         }
         [HttpDelete("delete-user")]
         public async Task<IActionResult> DeleteUser([FromQuery] Guid id)
         {
-            try
-            {
-                DeleteUserCommand requestModel = new(id);
-                return await CheckResult(requestModel);
-            }
-            catch (Exception e)
-            {
-                return ExceptionError(e);
-            }
+                DeleteUserCommand requestModel = new (id);
+                return await CheckResult(requestModel);         
         }
         private async Task<IActionResult> CheckResult(object model)
         {
@@ -96,14 +61,6 @@ namespace DailyTask.API.Controllers
             _response.Result = result;
             _response.DisplayMessage = "Sucessfully!";
             return Ok(_response);
-        }
-        private IActionResult ExceptionError(Exception e)
-        {
-            _response.Result = null;
-            _response.DisplayMessage = "Error!";
-            _response.IsSuccess = false;
-            _response.ErrorMessages = new List<string>() { e.Message };
-            return BadRequest(_response);
         }
     }
 }

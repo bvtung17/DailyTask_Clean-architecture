@@ -4,8 +4,6 @@ using DailyTask.Infrastructure.Cache;
 using DailyTask.Infrastructure.Persistence;
 using Hangfire;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
-using System.Collections.Concurrent;
 
 namespace DailyTask.Infrastructure.Repositories
 {
