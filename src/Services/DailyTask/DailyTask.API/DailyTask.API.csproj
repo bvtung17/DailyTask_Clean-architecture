@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DailyTask.Application\DailyTask.Application.csproj" />
     <ProjectReference Include="..\DailyTask.Infrastructure\DailyTask.Infrastructure.csproj" />
   </ItemGroup>
 

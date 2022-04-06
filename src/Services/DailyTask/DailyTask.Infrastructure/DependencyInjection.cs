@@ -26,7 +26,7 @@ namespace DailyTask.Infrastructure
             services.AddMemoryCache();
             services.AddTransient<MemoryCacheService>();
             services.AddTransient<RedisCacheService>();
-            services.AddTransient<Func<CacheTech, ICacheService>>(serviceProvider => key =>
+            services.AddSingleton<Func<CacheTech, ICacheService>>(serviceProvider => key =>
             {
                 return key switch
                 {
