@@ -1,40 +1,37 @@
-﻿using DailyTask.Application.Contracts.Interfaces.Persistence;
-using DailyTask.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Backend.Application.Contracts.Interfaces.Persistence;
+using Backend.Domain.Entities;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace TestApplication
 {
     public static class MockRepository
     {
-        public static Mock<IAsyncRepository<TaskDaily>> GetTaskDailyRepository()
+        public static Mock<IGenericRepository<DailyTask>> GetTaskDailyRepository()
         {
-            var tasks = new List<TaskDaily>
+            var tasks = new List<DailyTask>
             {
-                new TaskDaily {
+                new DailyTask {
                     TimeEnd = DateTime.Now,
                     TimeStart = DateTime.Now,
                     Title = "Xin Chào",
-                    UserId = new Guid(),
+                    
                 },
-                new TaskDaily {
+                new DailyTask {
                     TimeEnd = DateTime.Now,
                     TimeStart = DateTime.Now,
                     Title = "Xin Chào 2",
-                    UserId = new Guid(),
+                    
                 },
-                new TaskDaily {
+                new DailyTask {
                     TimeEnd = DateTime.Now,
                     TimeStart = DateTime.Now,
                     Title = "Xin Chào 3",
-                    UserId = new Guid(),
+                    
                 },
             };
-            var mockRepo = new Mock<IAsyncRepository<TaskDaily>>();
-            mockRepo.Setup(_ => _.GetAll()).ReturnsAsync(tasks);
+            var mockRepo = new Mock<IGenericRepository<DailyTask>>();
 
             return mockRepo;
         }
