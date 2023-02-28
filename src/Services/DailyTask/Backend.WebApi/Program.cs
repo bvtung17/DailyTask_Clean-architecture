@@ -5,6 +5,7 @@ using Backend.Application;
 using Backend.Application.Exceptions;
 using Backend.Application.Mappings;
 using Backend.Infrastructure;
+using Backend.WebApi.GrpcService;
 using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics;
@@ -48,6 +49,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseMiddleware<ErrorHandlerMiddleware>();
+app.MapGrpcService<HelloServiceGrpc>();
 app.MapControllers();
 
 app.Run();
