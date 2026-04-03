@@ -3,7 +3,9 @@ namespace Backend.Infrastructure.Repositories
     using Backend.Application.Common;
     using Backend.Application.Contracts.Interfaces.Persistence;
     using Backend.Domain.Common;
+    using Backend.Domain.Entities;
     using Backend.Infrastructure.Persistence;
+    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// The repository base.

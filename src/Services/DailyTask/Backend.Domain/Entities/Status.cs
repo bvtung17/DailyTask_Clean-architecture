@@ -1,23 +1,28 @@
 ﻿namespace Backend.Domain.Common
 {
     /// <summary>
-    /// Status enum.
+    /// Represents the status of a daily task.
     /// </summary>
     public enum Status
     {
         /// <summary>
-        /// To do.
+        /// Task is pending and not yet started.
         /// </summary>
-        Todo,
+        Todo = 0,
 
         /// <summary>
-        /// Inprogrest.
+        /// Task is currently in progress.
         /// </summary>
-        InProgrest,
+        InProgress = 1,
 
         /// <summary>
-        /// Done.
+        /// Task has been completed.
         /// </summary>
-        Done,
+        Done = 2,
+
+        /// <summary>
+        /// Task has been cancelled.
+        /// </summary>
+        Cancelled = 3,
     }
 }
