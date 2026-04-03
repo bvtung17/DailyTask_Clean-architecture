@@ -2,13 +2,14 @@
 {
     using Backend.Application.Common;
     using Backend.Application.Contracts.Interfaces.Persistence;
+    using Backend.Domain.Common;
     using Backend.Domain.Entities;
     using Backend.Infrastructure.Persistence;
+    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
-    /// The repository base.
+    /// The daily task repository.
     /// </summary>
-    /// <typeparam name="T">The entity base.</typeparam>
     public class DailyTaskRepository : RepositoryBase<DailyTask>, IDailyTaskRepository
     {
         /// <summary>
@@ -18,6 +19,15 @@
         public DailyTaskRepository(DailyDbContext db)
             : base(db)
         {
+        }
+
+        /// <inheritdoc/>
+        public async Task<List<DailyTask>> GetByStatusAsync(Status status, int take)
+        {
+            return await this.AsQueryable()
+                .Where(t => t.Status == status)
+                .Take(take)
+                .ToListAsync();
         }
     }
 }
